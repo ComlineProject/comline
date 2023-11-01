@@ -1,0 +1,8 @@
+// TODO: This proposal is about blanket implementations on protocol functions.
+// TODO: What would go inside would be a block of expressions (the same used in a Validator)
+// TODO: Statements could also exist but ONLY IF they really, really are necessary
+
+protocol TestBlanket {
+  function test_blank() { unimplemented() }
+  function test_blank_other() => StringBounds
+}

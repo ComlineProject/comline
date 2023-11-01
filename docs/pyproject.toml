@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "comline-docs"
+version = "0.1.0"
+description = ""
+authors = ["DOOME1M8"]
+readme = "README.md"
+# packages = [{include = "comline_docs"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+mkdocs = "^1.4.3"
+mkdocs-material = "^9.1.11"
+pillow = "^9.5.0"
+# cairosvg = "^2.7.0"
+mike = "^1.1.2"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

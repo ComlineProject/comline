@@ -1,0 +1,4 @@
+/home/nibunta/.nix-profile/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/nix/store/vchxj1r5hvmjmwzvw49jz28qrxgkfc6m-clion-2023.1.3/clion/bin/ninja/linux/x64/ninja -G Ninja -S "/run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99" -B "/run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug

@@ -1,0 +1,14 @@
+PackageIdentifier:  Comline.Comline
+PackageVersion:     0.0.1
+PackageLocale:      en-US
+Publisher:          Comline
+PackageName:        Comline (compiler, package manager)
+License:            Parity AND Prosperity
+ShortDescription:   Schema package compiler fit for message and call setup handling (similar concepts to Protobuf+GRPC, CapNP, FuchsiaIDL)
+Installers:
+  - Architecture:    x32, x64
+    InstallerType:   # Enumeration of supported installer types (exe, msi, msix, inno, wix, nullsoft, appx).
+    InstallerUrl:    https://git.ablecorp.us/DOOME1M8Cover/comline/releases/something
+    InstallerSha256: # SHA256 calculated from installer.
+ManifestType:       singleton
+ManifestVersion:    1.0.0

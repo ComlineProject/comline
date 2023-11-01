@@ -1,0 +1,15 @@
+# Generated with Comline compiler and code generator
+
+[package]
+name = "test_runtime_dylib"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+abi_stable = "0.11.2"
+comline-runtime = { path = "../core" }
+
+[lib]
+name = "test_runtime_dylib"
+crate-type = ["dylib"]

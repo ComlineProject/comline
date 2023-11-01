@@ -1,0 +1,47 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "Clang",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/include",
+						"/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include"
+					],
+					"linkDirectories" : 
+					[
+						"/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib",
+						"/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib",
+						"/nix/store/81d13il7plchw65gz8y9ywcxrngq149c-gcc-12.2.0-libgcc/lib",
+						"/nix/store/bahgqgbyvdjp0jchk076s2pr432mijm3-clang-7.1.0-lib/lib",
+						"/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0",
+						"/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"c"
+					]
+				},
+				"path" : "/run/current-system/sw/bin/cc",
+				"version" : "7.1.0"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

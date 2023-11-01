@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = [
+    "core",
+    "core_stdlib",
+    "codelib-gen",
+    "runtime/core",
+    "runtime/luau",
+    "runtime/test_rt_dylib",
+    "package-manager",
+    "package-server"
+]
+
+[profile.release]
+opt-level = 2

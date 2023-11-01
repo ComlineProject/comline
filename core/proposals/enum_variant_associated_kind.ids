@@ -1,0 +1,7 @@
+// TODO: Variants with fields need more thought to see if they can be implemented in languages
+// TODO: that may not do it well, or at all
+enum EncryptionMode {
+    None
+    // TODO: The »EncryptionAlgorithm« would be the kind for the »Encrypt« variant
+    Encrypt(EncryptionAlgorithm)
+}

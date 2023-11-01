@@ -1,0 +1,3 @@
+/run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/comline_rs.dir
+/run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/edit_cache.dir
+/run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/rebuild_cache.dir

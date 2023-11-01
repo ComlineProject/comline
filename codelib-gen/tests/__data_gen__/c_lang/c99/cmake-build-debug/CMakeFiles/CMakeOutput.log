@@ -1,0 +1,135 @@
+The system is: Linux - 6.4.4 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /run/current-system/sw/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is Clang, found in "/run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/3.25.3/CompilerIdC/a.out"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-NdUtky
+
+Run Build Command(s):/nix/store/vchxj1r5hvmjmwzvw49jz28qrxgkfc6m-clion-2023.1.3/clion/bin/ninja/linux/x64/ninja cmTC_b7f18 && [1/2] Building C object CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o
+clang version 7.1.0 (tags/RELEASE_710/final)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /nix/store/qlkm42fyny7xi86dlah1vqcqh280piri-clang-7.1.0/bin
+Found candidate GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib/gcc/x86_64-unknown-linux-gnu/12.2.0
+Found candidate GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0
+Selected GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0
+Candidate multilib: .;@m64
+Selected multilib: .;@m64
+ "/nix/store/qlkm42fyny7xi86dlah1vqcqh280piri-clang-7.1.0/bin/clang-7" -cc1 -triple x86_64-unknown-linux-gnu -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model static -mthread-model posix -mdisable-fp-elim -fmath-errno -masm-verbose -mconstructor-aliases -munwind-tables -fuse-init-array -target-cpu x86-64 -dwarf-column-info -debugger-tuning=gdb -v -coverage-notes-file /run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-NdUtky/CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.gcno -nostdsysteminc -resource-dir /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root -dependency-file CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o.d -sys-header-deps -MT CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o -idirafter /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include -internal-isystem /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/include -Wno-unused-command-line-argument -fdebug-compilation-dir /run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-NdUtky -ferror-limit 19 -fmessage-length 0 -fobjc-runtime=gcc -fdiagnostics-show-option -fcolor-diagnostics -o CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o -x c /nix/store/bnmxyb30n6b5fq1gj3f4jzwxf7z8b4ls-cmake-3.25.3/share/cmake-3.25/Modules/CMakeCCompilerABI.c -faddrsig
+clang -cc1 version 7.1.0 based upon LLVM 7.1.0 default target x86_64-unknown-linux-gnu
+#include "..." search starts here:
+#include <...> search starts here:
+ /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/include
+ /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include
+End of search list.
+[2/2] Linking C executable cmTC_b7f18
+clang version 7.1.0 (tags/RELEASE_710/final)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /nix/store/qlkm42fyny7xi86dlah1vqcqh280piri-clang-7.1.0/bin
+Found candidate GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib/gcc/x86_64-unknown-linux-gnu/12.2.0
+Found candidate GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0
+Selected GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0
+Candidate multilib: .;@m64
+Selected multilib: .;@m64
+ "/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/bin/ld" -export-dynamic --eh-frame-hdr -m elf_x86_64 -export-dynamic -o cmTC_b7f18 /nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crt1.o /nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crti.o /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtbegin.o -L/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib -L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0//lib -L/nix/store/81d13il7plchw65gz8y9ywcxrngq149c-gcc-12.2.0-libgcc/lib -L/nix/store/bahgqgbyvdjp0jchk076s2pr432mijm3-clang-7.1.0-lib/lib -L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0 -L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../../../lib64 -L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../.. -dynamic-linker=/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/ld-linux-x86-64.so.2 CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a -lc /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtend.o /nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crtn.o
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/include]
+    add: [/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include]
+  end of search list found
+  collapse include dir [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/include] ==> [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/include]
+  collapse include dir [/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include] ==> [/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include]
+  implicit include dirs: [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/include;/nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld\.lld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-NdUtky]
+  ignore line: []
+  ignore line: [Run Build Command(s):/nix/store/vchxj1r5hvmjmwzvw49jz28qrxgkfc6m-clion-2023.1.3/clion/bin/ninja/linux/x64/ninja cmTC_b7f18 && [1/2] Building C object CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o]
+  ignore line: [clang version 7.1.0 (tags/RELEASE_710/final)]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /nix/store/qlkm42fyny7xi86dlah1vqcqh280piri-clang-7.1.0/bin]
+  ignore line: [Found candidate GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib/gcc/x86_64-unknown-linux-gnu/12.2.0]
+  ignore line: [Found candidate GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0]
+  ignore line: [Selected GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0]
+  ignore line: [Candidate multilib: .]
+  ignore line: [@m64]
+  ignore line: [Selected multilib: .]
+  ignore line: [@m64]
+  ignore line: [ "/nix/store/qlkm42fyny7xi86dlah1vqcqh280piri-clang-7.1.0/bin/clang-7" -cc1 -triple x86_64-unknown-linux-gnu -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model static -mthread-model posix -mdisable-fp-elim -fmath-errno -masm-verbose -mconstructor-aliases -munwind-tables -fuse-init-array -target-cpu x86-64 -dwarf-column-info -debugger-tuning=gdb -v -coverage-notes-file /run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-NdUtky/CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.gcno -nostdsysteminc -resource-dir /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root -dependency-file CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o.d -sys-header-deps -MT CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o -idirafter /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include -internal-isystem /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/include -Wno-unused-command-line-argument -fdebug-compilation-dir /run/media/nibunta/OMTRON/Projectos/Programming Projects/Miscelaneous Projects/Unclassified/comline/comline-rs/codelib-gen/tests/__data_gen__/c_lang/c99/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-NdUtky -ferror-limit 19 -fmessage-length 0 -fobjc-runtime=gcc -fdiagnostics-show-option -fcolor-diagnostics -o CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o -x c /nix/store/bnmxyb30n6b5fq1gj3f4jzwxf7z8b4ls-cmake-3.25.3/share/cmake-3.25/Modules/CMakeCCompilerABI.c -faddrsig]
+  ignore line: [clang -cc1 version 7.1.0 based upon LLVM 7.1.0 default target x86_64-unknown-linux-gnu]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/include]
+  ignore line: [ /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include]
+  ignore line: [End of search list.]
+  ignore line: [[2/2] Linking C executable cmTC_b7f18]
+  ignore line: [clang version 7.1.0 (tags/RELEASE_710/final)]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /nix/store/qlkm42fyny7xi86dlah1vqcqh280piri-clang-7.1.0/bin]
+  ignore line: [Found candidate GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib/gcc/x86_64-unknown-linux-gnu/12.2.0]
+  ignore line: [Found candidate GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0]
+  ignore line: [Selected GCC installation: /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0]
+  ignore line: [Candidate multilib: .]
+  ignore line: [@m64]
+  ignore line: [Selected multilib: .]
+  ignore line: [@m64]
+  link line: [ "/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/bin/ld" -export-dynamic --eh-frame-hdr -m elf_x86_64 -export-dynamic -o cmTC_b7f18 /nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crt1.o /nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crti.o /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtbegin.o -L/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib -L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0//lib -L/nix/store/81d13il7plchw65gz8y9ywcxrngq149c-gcc-12.2.0-libgcc/lib -L/nix/store/bahgqgbyvdjp0jchk076s2pr432mijm3-clang-7.1.0-lib/lib -L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0 -L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../../../lib64 -L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../.. -dynamic-linker=/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/ld-linux-x86-64.so.2 CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a -lc /nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a /nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtend.o /nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crtn.o]
+    arg [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/bin/ld] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_b7f18] ==> ignore
+    arg [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crt1.o] ==> obj [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crt1.o]
+    arg [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crti.o] ==> obj [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crti.o]
+    arg [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtbegin.o] ==> obj [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtbegin.o]
+    arg [-L/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib] ==> dir [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib]
+    arg [-L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0//lib] ==> dir [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0//lib]
+    arg [-L/nix/store/81d13il7plchw65gz8y9ywcxrngq149c-gcc-12.2.0-libgcc/lib] ==> dir [/nix/store/81d13il7plchw65gz8y9ywcxrngq149c-gcc-12.2.0-libgcc/lib]
+    arg [-L/nix/store/bahgqgbyvdjp0jchk076s2pr432mijm3-clang-7.1.0-lib/lib] ==> dir [/nix/store/bahgqgbyvdjp0jchk076s2pr432mijm3-clang-7.1.0-lib/lib]
+    arg [-L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0] ==> dir [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0]
+    arg [-L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../../../lib64] ==> dir [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../../../lib64]
+    arg [-L/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../..] ==> dir [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../..]
+    arg [-dynamic-linker=/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/ld-linux-x86-64.so.2] ==> ignore
+    arg [CMakeFiles/cmTC_b7f18.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a] ==> lib [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a]
+    arg [-lc] ==> lib [c]
+    arg [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a] ==> lib [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a]
+    arg [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtend.o] ==> obj [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtend.o]
+    arg [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crtn.o] ==> obj [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crtn.o]
+  remove lib [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a]
+  remove lib [/nix/store/93knn8spw9vn2p89srackcr4zghf4sln-clang-wrapper-7.1.0/resource-root/lib/linux/libclang_rt.builtins-x86_64.a]
+  collapse library dir [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib] ==> [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib]
+  collapse library dir [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0//lib] ==> [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib]
+  collapse library dir [/nix/store/81d13il7plchw65gz8y9ywcxrngq149c-gcc-12.2.0-libgcc/lib] ==> [/nix/store/81d13il7plchw65gz8y9ywcxrngq149c-gcc-12.2.0-libgcc/lib]
+  collapse library dir [/nix/store/bahgqgbyvdjp0jchk076s2pr432mijm3-clang-7.1.0-lib/lib] ==> [/nix/store/bahgqgbyvdjp0jchk076s2pr432mijm3-clang-7.1.0-lib/lib]
+  collapse library dir [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0] ==> [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0]
+  collapse library dir [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../../../lib64] ==> [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64]
+  collapse library dir [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/../../..] ==> [/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64]
+  implicit libs: [c]
+  implicit objs: [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crt1.o;/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crti.o;/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtbegin.o;/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0/crtend.o;/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib/crtn.o]
+  implicit dirs: [/nix/store/46m4xx889wlhsdj72j38fnlyyvvvvbyb-glibc-2.37-8/lib;/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib;/nix/store/81d13il7plchw65gz8y9ywcxrngq149c-gcc-12.2.0-libgcc/lib;/nix/store/bahgqgbyvdjp0jchk076s2pr432mijm3-clang-7.1.0-lib/lib;/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64/gcc/x86_64-unknown-linux-gnu/12.2.0;/nix/store/b7hvml0m3qmqraz1022fwvyyg6fc1vdy-gcc-12.2.0/lib64]
+  implicit fwks: []
+
+

@@ -1,0 +1,13 @@
+// TODO: This is the original proposal, it would only dictate direction, below is the new proposal
+//#provider=Server
+
+// TODO: These parameters need more situational introspection to be documented
+#provider=Multiple
+#consumer=Multiple
+
+protocol Feed {
+    // Fetches new articles since last fetch
+    @flexible async stream
+    #timeout=1000ms per_send_timeout=10s cooldown=10s
+    1# function fetch_articles() -> Article[SENT_ARTICLES_MAX]
+}

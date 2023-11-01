@@ -1,0 +1,5 @@
+// TODO: Think what »discoverable« should mean, just like Fuchsia IDL
+@discoverable
+protocol OpenWorld {
+}
+

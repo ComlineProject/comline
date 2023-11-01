@@ -1,0 +1,17 @@
+// Ping Schema
+namespace test::idl::ping
+
+import test::idl::health
+
+const LOW_PING_RATE: u16 = 20
+
+
+/// Ping another address
+@provider=Any
+protocol Ping {
+    function ping() -> bool;
+
+    @timeout_ms=1000
+    function ping_limit() -> bool;
+}
+

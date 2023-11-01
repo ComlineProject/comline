@@ -1,0 +1,26 @@
+congregation test
+specification_version = 1
+
+schema_paths = [
+    "ping.ids"
+    "health.ids"
+]
+
+code_generation = {
+    languages = {
+        python#3.11.0 = { package_versions=[all] }
+        rust#1.70.0 = { package_versions=[all] }
+    }
+}
+
+publish_registries = {
+    mainstream = std::publish::MAINSTREAM_REGISTRY
+    my_registry = {
+        uri="https://newwars.colean.cc/my_cl_index/"
+        // method="ssh"
+    }
+    dev_test_registry = {
+        uri="local://{{package_path}}/.temp/registry/"
+    }
+}
+
