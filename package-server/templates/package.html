@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% if info.is_none() %}
+            Not found - Comline
+        {% else %}
+            {{name}} - Comline
+        {% endif %}
+    </title>
+    <div class="header" align="center">
+        <h1>Comline Project Indexer</h1>
+        <h4>Package manager server registry for packages</h4>
+    </div>
+</head>
+<body>
+    <div class="body" align="center">
+        {% if info.is_none() %}
+            <h2>No project by the name {{name}} was found</h2>
+        {% else %}
+            <h3>{{name}} - 0.0.1</h3>
+        {% endif %}
+    </div>
+</body>
+<style>
+    head {
+        height: 10%;
+    }
+    html, body {
+        height: 100%; width: 100%;
+        background-color: darkkhaki;
+    }
+
+    .header {
+        padding: 20px 20px;
+        background-color: darkseagreen;
+    }
+    .body {
+        border-top: 1px solid black;
+    }
+
+    .body input[type=text] {
+        padding: 6px;
+        margin-top: 8px;
+        margin-right: 16px;
+        font-size: 17px;
+    }
+</style>
+</html>

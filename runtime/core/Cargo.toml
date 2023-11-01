@@ -1,0 +1,28 @@
+[package]
+name = "comline-runtime"
+version = "0.1.0"
+edition = "2021"
+# license = "Parity OR Prosperity"
+
+
+[dependencies]
+eyre = "0.6.8"
+async-trait = "0.1.74"
+downcast-rs = "1.2.0"
+tokio = { version = "1.33.0", features = ["full"] }
+abi_stable = "0.11.2"
+libloading = "0.8.0"
+bytemuck = { version = "1.14.0", features = ["derive"] }
+
+# Call Systems
+json_rpc_v2 = "0.2.0"
+
+# Message Formats
+rmp = "0.8.12"
+rmp-serde = "1.1.2"
+serde = "1.0.190"
+
+
+[dev-dependencies]
+tokio = { version = "1.33.0", features = ["full"] }
+
