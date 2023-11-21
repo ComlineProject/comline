@@ -6,7 +6,6 @@ pub mod systems;
 
 // Crate Uses
 use crate::setup::call_system::meta::CallProtocolMeta;
-use crate::setup::communication::consumer::ConsumerCapability;
 
 // External Uses
 use downcast_rs::{DowncastSync, impl_downcast};

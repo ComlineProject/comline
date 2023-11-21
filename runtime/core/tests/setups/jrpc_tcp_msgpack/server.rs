@@ -1,7 +1,9 @@
 // Standard Uses
 
 // Crate Uses
-use crate::jrpc_tcp_msgpack::schemas::{GreetConsumerProtocol, GreetProtocol, GreetProviderProtocol};
+use crate::setups::jrpc_tcp_msgpack::schemas::{
+    GreetConsumerProtocol, GreetProtocol, GreetProviderProtocol
+};
 
 // External Uses
 use eyre::Result;

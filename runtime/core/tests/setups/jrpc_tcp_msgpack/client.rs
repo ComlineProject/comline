@@ -1,8 +1,8 @@
 // Standard Uses
 
 // Crate Uses
-use crate::jrpc_tcp_msgpack::server::GreetConsumer;
-use crate::jrpc_tcp_msgpack::schemas::GreetConsumerProtocol;
+use crate::setups::jrpc_tcp_msgpack::server::GreetConsumer;
+use crate::setups::jrpc_tcp_msgpack::schemas::GreetConsumerProtocol;
 
 // External Uses
 use comline_runtime::setup::call_system::systems::json_rpc::JsonRPCv2;
