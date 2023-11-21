@@ -19,6 +19,7 @@
       <sourceFolder url="file://$MODULE_DIR$/codelib-gen/lua/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/codelib-gen/luau/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/codelib-gen/python/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/comline/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/luau/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/luau/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/python/src" isTestSource="false" />

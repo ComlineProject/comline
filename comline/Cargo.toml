@@ -1,0 +1,10 @@
+[package]
+name = "comline"
+version = "0.1.0"
+edition = "2021"
+license = "Not decided yet"
+repository = "https://github.com/ComlineProject/comline"
+description = "A project in the works, patiently"
+
+
+[dependencies]

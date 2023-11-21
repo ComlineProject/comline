@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+    "comline",
     "core",
     "core_stdlib",
     "codelib-gen/_core",
