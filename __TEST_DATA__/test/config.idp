@@ -1,9 +1,10 @@
 congregation test
 specification_version = 1
 
+// schemas_source_path = "src/"
 schema_paths = [
-    "ping.ids"
-    "health.ids"
+    "src/ping.ids"
+    "src/health.ids"
 ]
 
 code_generation = {

@@ -2,7 +2,9 @@
 pub mod client;
 pub mod manager;
 pub mod tui;
-// pub mod tests;
+
+#[cfg(test)]
+pub mod tests;
 
 
 // Standard Uses
@@ -12,9 +14,11 @@ use std::path::Path;
 use crate::client::{create_empty_package_at, dependency};
 
 // External Uses
+use comline_core::project;
+use comline_core::project::ir::frozen as project_frozen;
+
 use clap::{Parser, Subcommand};
-use comline::project;
-use comline::project::ir::frozen as project_frozen;
+
 
 
 #[derive(Parser)]
@@ -53,7 +57,7 @@ enum Commands {
     /// Build package
     Build,
 
-    /// Publish a package
+    /// Publish package
     Publish {
         /// The registries on where to publish, divided by space
         #[arg(long)]
@@ -110,11 +114,16 @@ pub fn main() {
             println!("Starting build process...");
             let package_path = std::env::current_dir().unwrap();
 
-            if let Err(e) = project::build::build(&package_path) {
-                eprintln!("Couldn't build package: \n - {}", e)
+            match project::build::build(&package_path) {
+                Ok(ctx) => {
+                    println!(
+                        "Built package to latest version ({}) 🐸",
+                        project::ir::frozen::version(&ctx.config_frozen.unwrap())
+                            .unwrap()
+                    )
+                }
+                Err(e) => eprintln!("Couldn't build package: \n - {}", e)
             }
-
-            println!("Built package to latest version 🐸")
         },
         Publish { registries } => {
             let parts: Vec<String> = registries.split_whitespace()

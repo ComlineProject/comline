@@ -13,7 +13,7 @@ use crate::schema::ir::frozen::{
 };
 
 // External Uses
-use eyre::Result;
+use eyre::{Context, Result};
 
 
 pub type PackageVersion = (Vec<ProjectUnit>, Vec<Vec<SchemaUnit>>);
@@ -43,10 +43,15 @@ fn load_package_version(version_path: &Path) -> Result<PackageVersion> {
     let schemas_path = Path::new(version_path).join("schemas/");
 
     let mut schemas = vec![];
-    for entry in fs::read_dir(schemas_path)? {
+    let dir = fs::read_dir(&schemas_path)
+        .with_context(|| format!("Couldn't read entries at path: '{}'", schemas_path.display()))?;
+
+    for entry in dir {
         let entry = entry?.path();
 
-        if !entry.is_dir() { panic!("") }
+        if !entry.is_dir() {
+            panic!("")
+        }
 
         let version_path = entry.as_path();
         schemas.push(

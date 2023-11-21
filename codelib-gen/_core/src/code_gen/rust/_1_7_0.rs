@@ -4,7 +4,7 @@
 use crate::utils;
 
 // External Uses
-use comline::schema::ir::frozen::unit::{FrozenArgument, FrozenUnit};
+use comline_core::schema::ir::frozen::unit::{FrozenArgument, FrozenUnit};
 
 
 #[allow(unused)]

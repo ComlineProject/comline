@@ -7,9 +7,9 @@ pub mod luau;
 use std::collections::HashMap;
 
 // Crate Uses
-use crate::code_gen::VersionGenerators;
 
 // External Uses
+use comline_codelib_gen::code_gen::VersionGenerators;
 use once_cell::sync::Lazy;
 
 

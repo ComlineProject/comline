@@ -8,8 +8,9 @@ use crate::client::publish;
 use crate::tests::client::{COMLINE_HOME_NAME, COMLINE_HOME_PATH};
 
 // External Uses
+use comline_core::project::ir::frozen::{PublishRegistry, RegistryKind};
+
 use once_cell::sync::Lazy;
-use comline::project::ir::frozen::{PublishRegistry, RegistryKind};
 
 
 pub static PACKAGE_REGISTRIES_PATH: Lazy<&Path> = Lazy::new(|| Path::new(

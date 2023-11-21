@@ -6,8 +6,8 @@ use std::fmt::Write;
 // Crate Uses
 
 // External Uses
-use comline::project::ir::frozen::loader as package_loader;
-use comline::project::ir::frozen::loader::PackageVersion;
+use comline_core::project::ir::frozen::loader as package_loader;
+use comline_core::project::ir::frozen::loader::PackageVersion;
 
 use eyre::{bail, Result};
 use reqwest::{

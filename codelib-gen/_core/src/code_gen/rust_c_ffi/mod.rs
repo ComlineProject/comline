@@ -4,7 +4,7 @@ use std::path::Path;
 // Crate Uses
 
 // External Uses
-use comline::schema::ir::frozen::unit::{FrozenUnit as SchemaUnit};
+use comline_core::schema::ir::frozen::unit::{FrozenUnit as SchemaUnit};
 use eyre::Result;
 
 

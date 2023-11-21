@@ -7,8 +7,9 @@ pub(crate) mod dependency;
 use std::path::Path;
 
 // External Uses
+use comline_core::project::idl::constants::CONGREGATION_EXTENSION;
+
 use eyre::{bail, Context, Result};
-use comline::project::idl::constants::CONGREGATION_EXTENSION;
 
 
 pub fn create_empty_package_at(new_package_path: &Path, name: &str, force: &bool) -> Result<()> {

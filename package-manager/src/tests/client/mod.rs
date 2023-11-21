@@ -1,6 +1,7 @@
 // Relative Modules
 pub mod dependencies;
 pub mod registries;
+mod building;
 
 // Standard Uses
 
@@ -11,10 +12,9 @@ use crate::tests::client::registries::{
     registry_login_test, set_and_check_home_env_var, setup_local_registry
 };
 
-
 // External Uses
-use comline::project::ir::context::{Origin, ProjectContext};
-use comline::project::ir::frozen::FrozenUnit;
+use comline_core::project::ir::context::{Origin, ProjectContext};
+use comline_core::project::ir::frozen::FrozenUnit;
 
 
 const COMLINE_HOME_NAME: &str = "COMLINE_HOME";

@@ -5,4 +5,8 @@ edition = "2021"
 
 
 [dependencies]
+comline-core = { path="../../core" }
+comline-codelib-gen = { path="../_core" }
+
+once_cell = "1.18.0"
 # mlua =  { version = "0.9.1", features = ["luau", "module"] }

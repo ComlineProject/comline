@@ -40,6 +40,11 @@ pub fn interpret_assignment(
 
             vec![FrozenUnit::SpecificationVersion(*version as u8)]
         },
+        /*
+        "schemas_source_path" => {
+            todo!()
+        }
+        */
         "schema_paths" => {
             let AssignmentUnit::List(paths) = &node.1 else {
                 panic!("'schema_paths' should be a list of paths, got something else instead.")
@@ -75,7 +80,7 @@ pub fn interpret_assignment(
             interpret_assigment_publish_registries(items)?
         },
         any => {
-            panic!("'{}' is not a valid assignment", any)
+            panic!("Assignment '{}' is not a valid assignment", any)
         }
     };
 

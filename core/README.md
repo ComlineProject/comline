@@ -1,10 +1,9 @@
-# Comline
-Comline(Communication on Line) is a library
-
+# Comline core
+Comline(Communication on Line) is a library/executable
 
 
 ## Language details
-Rust
+Made in Rust
 
 
 ## Resource Links
@@ -21,19 +20,4 @@ https://www.youtube.com/watch?v=ApHpmA1k73k
 
 ### Optimizing AST parsing and allocation
 https://cs.hofstra.edu/~cscccl/rustlr_project/chapter6.html
-
-
-## Code and Library Generation Resource links
-Rust: https://crates.io/crates/abi_stable
-
-C / C++:
- - https://crates.io/crates/cbindgen, 
- - https://doc.rust-lang.org/nomicon/ffi.html, 
- - https://rust-lang.github.io/rust-bindgen/introduction.html
-
-C#: https://crates.io/crates/csbindgen
-
-Lua/Luau: https://crates.io/crates/mlua
-
-Python: https://crates.io/crates/pyo3
 

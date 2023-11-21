@@ -5,4 +5,6 @@ edition = "2021"
 
 
 [dependencies]
+comline-codelib-gen = { path = "../_core" }
+
 mlua =  { version = "0.9.1", features = ["lua51", "module"] }

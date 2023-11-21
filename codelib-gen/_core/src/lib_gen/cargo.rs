@@ -5,7 +5,7 @@ use std::path::Path;
 use crate::{code_gen, utils};
 
 // External Uses
-use comline::schema::ir::frozen::unit::{FrozenContextWhole as FrozenSchema};
+use comline_core::schema::ir::frozen::unit::{FrozenContextWhole as FrozenSchema};
 
 use eyre::Result;
 use toml_edit::{Document, Array, table, value};

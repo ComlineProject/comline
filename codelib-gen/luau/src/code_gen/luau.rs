@@ -3,7 +3,7 @@
 // Crate Uses
 
 // External Uses
-use comline::schema::ir::frozen::unit::FrozenUnit;
+use comline_core::schema::ir::frozen::unit::FrozenUnit;
 
 
 #[allow(unused)]

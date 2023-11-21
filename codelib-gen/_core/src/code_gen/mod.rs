@@ -1,12 +1,12 @@
 // Compiled Languages
 pub(crate) mod rust;
 pub(crate) mod rust_c_ffi;
-pub(crate) mod c_lang;
+//pub(crate) mod c_lang;
 
 // Dynamic Languages
-pub(crate) mod lua;
-pub(crate) mod luau;
-pub(crate) mod python;
+//pub(crate) mod lua;
+//pub(crate) mod luau;
+//pub(crate) mod python;
 
 // Standard Uses
 use std::collections::HashMap;
@@ -14,7 +14,7 @@ use std::collections::HashMap;
 // Crate Uses
 
 // External Uses
-use comline::schema::ir::frozen::unit::FrozenUnit;
+use comline_core::schema::ir::frozen::unit::FrozenUnit;
 use once_cell::sync::Lazy;
 
 
@@ -30,8 +30,8 @@ static LANG_GENERATORS: Lazy<HashMap<&str, (&VersionGenerators, &str)>> = Lazy::
     HashMap::from([
         ("rust", (&rust::GENERATORS, "rs")),
 
-        ("luau", (&luau::GENERATORS, "luau")),
-        ("python", (&python::GENERATORS, "py"))
+        //("luau", (&luau::GENERATORS, "luau")),
+        //("python", (&python::GENERATORS, "py"))
     ])
 });
 

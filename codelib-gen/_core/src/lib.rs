@@ -14,7 +14,7 @@ use std::path::Path;
 use crate::lib_gen::cargo;
 
 // External Uses
-use comline::{
+use comline_core::{
     project::ir::frozen::{
         FrozenUnit as FrozenProjectUnit,
         FrozenWhole as FrozenProject
@@ -34,7 +34,7 @@ pub fn generate_for_frozen_project(
     for unit in project.1.iter() {
         match unit {
             FrozenProjectUnit::Namespace(n) => name = Some(n),
-            FrozenProjectUnit::Version(v) => version = Some(v),
+            //FrozenProjectUnit::Version(v) => version = Some(v),
             _ => {}
         }
     }
