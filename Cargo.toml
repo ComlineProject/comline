@@ -3,7 +3,11 @@ resolver = "2"
 members = [
     "core",
     "core_stdlib",
-    "codelib-gen",
+    "codelib-gen/_core",
+    "codelib-gen/c",
+    "codelib-gen/lua",
+    "codelib-gen/luau",
+    "codelib-gen/python",
     "runtime/core",
     "runtime/test_rt_dylib",
     "runtime-langs/luau",

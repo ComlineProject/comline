@@ -1,0 +1,8 @@
+[package]
+name = "comline-codelib-gen-luau"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+# mlua =  { version = "0.9.1", features = ["luau", "module"] }

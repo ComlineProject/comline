@@ -2,8 +2,6 @@
 <module type="EMPTY_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/codelib-gen/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/codelib-gen/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/core/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/tests" isTestSource="true" />
@@ -14,12 +12,19 @@
       <sourceFolder url="file://$MODULE_DIR$/runtime/test_rt_dylib/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/package-server/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime/core/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/codelib-gen/_core/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/codelib-gen/_core/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/codelib-gen/c/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/codelib-gen/lua/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/codelib-gen/lua/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/codelib-gen/luau/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/codelib-gen/python/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/luau/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/luau/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/python/src" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/codelib-gen/target" />
       <excludeFolder url="file://$MODULE_DIR$/core/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/codelib-gen/_core/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
