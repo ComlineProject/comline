@@ -25,6 +25,10 @@ struct TellBackError {
 }
 ";
 
+mod generated {
+
+}
+
 
 fn main() {
     todo!()

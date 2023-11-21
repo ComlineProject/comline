@@ -13,7 +13,7 @@ use comline::project::ir::frozen::{PublishRegistry, RegistryKind};
 
 
 pub static PACKAGE_REGISTRIES_PATH: Lazy<&Path> = Lazy::new(|| Path::new(
-    "../__test_data__/.temp/registry/"
+    "../__TEST_DATA__/.temp/registry/"
 ));
 
 pub static PACKAGE_REGISTRIES: Lazy<HashMap<String, PublishRegistry>> = Lazy::new(||
@@ -26,7 +26,7 @@ pub static PACKAGE_REGISTRIES: Lazy<HashMap<String, PublishRegistry>> = Lazy::ne
 );
 
 pub fn setup_local_registry() {
-    let package_path = Path::new("../__test_data__/test/");
+    let package_path = Path::new("../__TEST_DATA__/test/");
     let temp_path = package_path.parent().unwrap().join(".temp/");
     let registry_path = temp_path.join("registry/");
 

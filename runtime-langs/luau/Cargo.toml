@@ -5,7 +5,8 @@ edition = "2021"
 
 
 [dependencies]
-comline-runtime = { version = "0.1.0", path = "../core" }
+comline-runtime = { version = "0.1.0", path = "../../runtime/core" }
+
 mlua = { version = "0.9.1", features = ["lua51", "module", "serialize"] }
 serde = "1.0"
 serde_yaml = "0.9"

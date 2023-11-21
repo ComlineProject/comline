@@ -5,8 +5,9 @@ members = [
     "core_stdlib",
     "codelib-gen",
     "runtime/core",
-    "runtime/luau",
     "runtime/test_rt_dylib",
+    "runtime-langs/luau",
+    "runtime-langs/python",
     "package-manager",
     "package-server"
 ]

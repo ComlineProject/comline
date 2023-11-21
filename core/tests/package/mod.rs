@@ -13,7 +13,7 @@ use once_cell::sync::Lazy;
 use comline::project::idl::constants::CONGREGATION_EXTENSION;
 
 
-static TEST_PACKAGE_DIR: Lazy<&Path> = Lazy::new(|| Path::new("../__test_data__/test/"));
+static TEST_PACKAGE_DIR: Lazy<&Path> = Lazy::new(|| Path::new("../__TEST_DATA__/test/"));
 static TEST_PACKAGE_CFG_PATH: Lazy<PathBuf> = Lazy::new(||
     TEST_PACKAGE_DIR.join(format!("config.{}", CONGREGATION_EXTENSION))
 );
