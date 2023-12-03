@@ -5,16 +5,31 @@ use std::path::Path;
 use crate::schema::ir::frozen::unit::FrozenUnit;
 
 // External Uses
-use eyre::{anyhow, Result};
+use eyre::{anyhow, Context, Result};
 
 
-/// Load all schema frozen units from a frozen origin schemas directory
-pub(crate) fn all_from_version_frozen(version_path: &Path) -> Result<Vec<Vec<FrozenUnit>>> {
+/// Load all schema frozen units from a specific version's frozen schemas directory
+/// # Arguments
+/// * `version_path` - Path to a package's frozen version
+/// # Example
+/// ```
+/// use std::path::Path;
+/// use comline_core::schema::ir::frozen::basic_storage;
+///
+/// let froze_version_path = Path::new("some_package/.frozen/0.0.1/");
+/// let frozen_version = basic_storage::deserialize::all_from_version_frozen(froze_version_path);
+/// ```
+pub fn all_from_version_frozen(version_path: &Path) -> Result<Vec<Vec<FrozenUnit>>> {
     let schemas_path = version_path.join("schemas/");
 
     let mut schemas = vec![];
 
-    for file in std::fs::read_dir(&schemas_path)? {
+    let entries = std::fs::read_dir(&schemas_path)
+        .with_context(||
+            format!("Couldn't read version frozen data at '{}'", schemas_path.display())
+        )?;
+
+    for file in entries {
         let schema_path = file?.path();
 
         if !schema_path.is_file() {

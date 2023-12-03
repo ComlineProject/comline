@@ -13,8 +13,8 @@ use crate::tests::client::registries::{
 };
 
 // External Uses
-use comline_core::project::ir::context::{Origin, ProjectContext};
-use comline_core::project::ir::frozen::FrozenUnit;
+use comline_core::package::config::ir::context::{Origin, ProjectContext};
+use comline_core::package::config::ir::frozen::FrozenUnit;
 
 
 const COMLINE_HOME_NAME: &str = "COMLINE_HOME";

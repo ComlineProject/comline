@@ -1,12 +1,13 @@
 // Standard Uses
 
 // Local Uses
-use comline::schema::ir::frozen::unit::FrozenUnit;
 
 // External Uses
+use comline_core::autodoc;
+use comline_core::schema::ir::compiler::interpreted::kind_search::{KindValue, Primitive};
+use comline_core::schema::ir::frozen::unit::FrozenUnit;
+
 use once_cell::sync::Lazy;
-use comline::autodoc;
-use comline::schema::ir::compiler::interpreted::kind_search::{KindValue, Primitive};
 
 
 static PREVIOUS_FROZEN_UNITS: Lazy<Vec<FrozenUnit>> = Lazy::new(||

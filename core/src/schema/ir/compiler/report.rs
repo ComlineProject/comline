@@ -29,7 +29,9 @@ impl CompileError {
 #[repr(u16)]
 #[derive(Debug, Snafu)]
 pub enum CompileWarning {
-    #[snafu(display("No dependencies were assigned, this will automatically add Comline's langlib'"))]
+    #[snafu(
+        display("No dependencies were specified, this will automatically add comline lang_lib'")
+    )]
     DependenciesNotFilled
 }
 

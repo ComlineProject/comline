@@ -1,3 +1,3 @@
-mod idl;
-mod package;
+mod schema;
+mod package_config;
 mod autodoc;

@@ -4,9 +4,9 @@ use std::path::Path;
 // Crate Uses
 
 // External Uses
-use comline_core::project::ir::frozen::Dependency;
-use comline_core::project::ir::context::ProjectContext;
-use comline_core::project::ir::frozen;
+use comline_core::package::config::ir::frozen::Dependency;
+use comline_core::package::config::ir::context::ProjectContext;
+use comline_core::package::config::ir::frozen;
 
 use eyre::Result;
 

@@ -1,17 +1,17 @@
 // Standard Uses
-use std::cell::RefCell;
 use std::rc::Rc;
-use snafu::ResultExt;
+use std::cell::RefCell;
 
 // Crate Uses
 use crate::report::ReportDetails;
 use crate::schema::ir::context::SchemaContext;
-use crate::project::ir::context::ProjectContext;
 use crate::schema::ir::compiler::interpreter::semi_frozen;
 use crate::schema::ir::compiler::report;
 use crate::schema::ir::compiler::report::CompileError;
+use crate::package::config::ir::context::ProjectContext;
 
 // External Uses
+use snafu::ResultExt;
 
 
 pub fn compile_schema_metadata(

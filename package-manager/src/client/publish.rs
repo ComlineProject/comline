@@ -6,10 +6,10 @@ use std::collections::HashMap;
 use crate::client::registry;
 
 // External Uses
-use comline_core::project::build;
-use comline_core::project::ir::context::ProjectContext;
-use comline_core::project::ir::frozen as project_frozen;
-use comline_core::project::ir::frozen::{PublishRegistry, RegistryKind};
+use comline_core::package::build;
+use comline_core::package::config::ir::context::ProjectContext;
+use comline_core::package::config::ir::frozen as project_frozen;
+use comline_core::package::config::ir::frozen::{PublishRegistry, RegistryKind};
 
 use once_cell::sync::Lazy;
 use serde::{Deserialize, Serialize};

@@ -1,8 +1,8 @@
 // Standard Uses
 
 // Crate Uses
-use crate::project::ir::diff::Differ;
-use crate::project::ir::frozen::Dependency;
+use crate::package::config::ir::diff::Differ;
+use crate::package::config::ir::frozen::Dependency;
 
 // External Uses
 

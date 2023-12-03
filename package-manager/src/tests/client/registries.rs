@@ -8,7 +8,7 @@ use crate::client::publish;
 use crate::tests::client::{COMLINE_HOME_NAME, COMLINE_HOME_PATH};
 
 // External Uses
-use comline_core::project::ir::frozen::{PublishRegistry, RegistryKind};
+use comline_core::package::config::ir::frozen::{PublishRegistry, RegistryKind};
 
 use once_cell::sync::Lazy;
 

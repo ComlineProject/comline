@@ -5,17 +5,20 @@ use std::path::Path;
 
 // External Uses
 use comline_core::schema::ir::frozen::unit::{FrozenUnit as SchemaUnit};
+
 use eyre::Result;
 
 
-pub fn to_schemas_ffi(path: &Path, schemas: &[Vec<SchemaUnit>]) -> Result<()> {
+pub fn to_schemas_ffi(generation_path: &Path, schemas: &[Vec<SchemaUnit>]) -> Result<()> {
     let mut result = vec![];
 
     for schema in schemas {
         result.push(to_schema_code(schema));
     }
 
-    for res in result { print!("{res}") }
+    for res in result {
+        println!("Res: {res}")
+    }
 
     Ok(())
 }

@@ -1,26 +1,24 @@
 // Standard Uses
-use std::path::{Path, PathBuf};
 
 // Crate Uses
+use crate::{TEST_PACKAGE_BUILD_PATH, TEST_PACKAGE_PATH};
 
 // External Uses
-use once_cell::sync::Lazy;
 use comline_codelib_gen::lib_gen::rust_c_ffi;
 
-
-static TEST_PACKAGE_PATH: Lazy<PathBuf> = Lazy::new(||
-    Path::new("../../__TEST_DATA__/test/").to_path_buf()
-);
-
-static TEST_PACKAGE_BUILD_PATH: Lazy<PathBuf> = Lazy::new(||
-    Path::new("tests/__TEMP__/test_package/").to_path_buf()
-);
+use glob::glob;
 
 
 #[test]
 fn generate_lib() {
-    rust_c_ffi::generate_project_into(
+    rust_c_ffi::generate_package_into_path(
         &TEST_PACKAGE_PATH, &TEST_PACKAGE_BUILD_PATH
     ).unwrap();
+
+    let pattern = &*format!("{}/*/*.rs", TEST_PACKAGE_BUILD_PATH.display());
+    let entries =  glob(pattern).unwrap();
+    for entry in entries {
+
+    }
 }
 

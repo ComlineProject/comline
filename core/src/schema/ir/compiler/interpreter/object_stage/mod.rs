@@ -11,7 +11,7 @@ use crate::schema::idl::ast::unit::{ASTUnit, SpannedUnit};
 use crate::schema::ir::compiler::interpreted::kind_search;
 use crate::schema::ir::compiler::interpreted::kind_search::{KindValue};
 use crate::schema::ir::frozen::unit::{FrozenArgument, FrozenUnit};
-use crate::project::ir::context::ProjectContext;
+use crate::package::config::ir::context::ProjectContext;
 
 // External Uses
 

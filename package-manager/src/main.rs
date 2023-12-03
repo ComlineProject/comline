@@ -14,8 +14,8 @@ use std::path::Path;
 use crate::client::{create_empty_package_at, dependency};
 
 // External Uses
-use comline_core::project;
-use comline_core::project::ir::frozen as project_frozen;
+use comline_core::package;
+use comline_core::package::config::ir::frozen as package_frozen;
 
 use clap::{Parser, Subcommand};
 
@@ -95,7 +95,7 @@ pub fn main() {
                     eprintln!("Given package path does not exist")
                 }
 
-                if !project::is_package_path(dependency_path) {
+                if !package::config::is_package_path(dependency_path) {
                     eprintln!("Given package path does not seem to be a valid package")
                 }
 
@@ -114,11 +114,11 @@ pub fn main() {
             println!("Starting build process...");
             let package_path = std::env::current_dir().unwrap();
 
-            match project::build::build(&package_path) {
+            match package::build::build(&package_path) {
                 Ok(ctx) => {
                     println!(
                         "Built package to latest version ({}) 🐸",
-                        project::ir::frozen::version(&ctx.config_frozen.unwrap())
+                        package::config::ir::frozen::version(&ctx.config_frozen.unwrap())
                             .unwrap()
                     )
                 }
@@ -135,12 +135,12 @@ pub fn main() {
 
             println!("Building package before trying to publish");
             let package_path = std::env::current_dir().unwrap();
-            let package_ctx = project::build::build(&package_path)
+            let package_ctx = package::build::build(&package_path)
                 .unwrap();
 
             let package_config = package_ctx.config_frozen.as_ref().unwrap();
-            let package_name = project_frozen::namespace(package_config).unwrap();
-            let package_version = project_frozen::version(package_config).unwrap();
+            let package_name = package_frozen::namespace(package_config).unwrap();
+            let package_version = package_frozen::version(package_config).unwrap();
             println!(
                 "Package '{}'#'{}' is okay, starting publish in registries",
                 package_name, package_version

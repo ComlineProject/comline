@@ -5,7 +5,7 @@ use std::cell::Ref;
 use crate::schema::ir::context::SchemaContext;
 use crate::schema::ir::compiler::report::CompileError;
 use crate::schema::ir::compiler::report;
-use crate::project::ir::context::ProjectContext;
+use crate::package::config::ir::context::ProjectContext;
 use crate::report::ReportDetails;
 use crate::utils::codemap::Span;
 

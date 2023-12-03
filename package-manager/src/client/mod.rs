@@ -7,7 +7,7 @@ pub(crate) mod dependency;
 use std::path::Path;
 
 // External Uses
-use comline_core::project::idl::constants::CONGREGATION_EXTENSION;
+use comline_core::package::config::idl::constants::CONGREGATION_EXTENSION;
 
 use eyre::{bail, Context, Result};
 

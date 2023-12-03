@@ -1,12 +1,6 @@
 // Compiled Languages
-pub(crate) mod rust;
-pub(crate) mod rust_c_ffi;
-//pub(crate) mod c_lang;
-
-// Dynamic Languages
-//pub(crate) mod lua;
-//pub(crate) mod luau;
-//pub(crate) mod python;
+pub mod rust;
+pub mod rust_c_ffi;
 
 // Standard Uses
 use std::collections::HashMap;
@@ -15,6 +9,7 @@ use std::collections::HashMap;
 
 // External Uses
 use comline_core::schema::ir::frozen::unit::FrozenUnit;
+
 use once_cell::sync::Lazy;
 
 

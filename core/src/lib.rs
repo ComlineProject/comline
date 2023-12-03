@@ -2,9 +2,9 @@
 
 // Relative Modules
 pub mod schema;
-pub mod project;
+pub mod package;
 pub mod autodoc;
 pub mod utils;
 pub mod report;
 pub mod codelib_gen;
-// pub mod langlib;
+// pub mod lang_lib;

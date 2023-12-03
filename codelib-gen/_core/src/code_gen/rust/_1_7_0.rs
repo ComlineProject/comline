@@ -4,23 +4,25 @@
 use crate::utils;
 
 // External Uses
-use comline_core::schema::ir::frozen::unit::{FrozenArgument, FrozenUnit};
+use comline_core::schema::ir::frozen::unit::{
+    FrozenArgument, FrozenUnit as FrozenSchemaUnit
+};
 
 
-#[allow(unused)]
-pub fn frozen_to_code(units: &Vec<FrozenUnit>) -> String {
+pub fn frozen_schema_to_code(units: &Vec<FrozenSchemaUnit>) -> String {
     let mut code = utils::generation_note("//");
 
-    for unit in units { code += &*unit_to_code(&unit); }
+    for unit in units {
+        code += &*unit_to_code(&unit);
+    }
 
     code
 }
 
-#[allow(unused)]
-fn unit_to_code(frozen_unit: &FrozenUnit) -> String {
+fn unit_to_code(frozen_unit: &FrozenSchemaUnit) -> String {
     let mut code = String::new();
 
-    use FrozenUnit::*;
+    use FrozenSchemaUnit::*;
     match frozen_unit {
         Namespace(_) => {}
         Import(_) => {}

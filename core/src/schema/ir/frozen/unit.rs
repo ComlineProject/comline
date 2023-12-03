@@ -98,13 +98,13 @@ pub struct  FrozenArgument {
 }
 
 
-pub fn namespace_or_panic(frozen: &[FrozenUnit]) -> &str {
+pub fn schema_namespace(frozen: &[FrozenUnit]) -> Option<&str> {
     for unit in frozen {
         if let FrozenUnit::Namespace(name) = unit {
-            return name
+            return Some(name)
         }
     }
 
-    panic!("Schema has no namespace, critical point")
+    None
 }
 
