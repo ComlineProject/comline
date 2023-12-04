@@ -3,16 +3,11 @@ use std::rc::Rc;
 use std::cell::RefCell;
 
 // Crate Uses
-use crate::report::ReportDetails;
 use crate::schema::ir::context::SchemaContext;
 use crate::schema::ir::compiler::interpreter::semi_frozen;
-use crate::schema::ir::compiler::report;
-use crate::schema::ir::compiler::report::CompileError;
 use crate::package::config::ir::context::ProjectContext;
 
 // External Uses
-use snafu::ResultExt;
-use crate::schema::idl::ast::unit::namespace;
 
 
 pub fn compile_schema_metadata(
@@ -51,7 +46,7 @@ pub fn compile_schema_metadata(
         match &spanned_unit.1 {
             // TODO: ASTs are not supposed to have a namespace unit, because its automatically
             //       decided based on source folder structure, remove this later
-            Namespace{..} => {},
+            Namespace { .. } => { todo!() },
             Docstring {..} => {
                 todo!()
             }

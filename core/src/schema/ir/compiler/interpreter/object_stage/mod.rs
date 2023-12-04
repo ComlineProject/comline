@@ -16,7 +16,6 @@ use crate::package::config::ir::context::ProjectContext;
 // External Uses
 
 
-#[allow(unused)]
 pub fn compile_schema(
     schema_context: Rc<RefCell<SchemaContext>>,
     project_context: &ProjectContext
@@ -24,22 +23,29 @@ pub fn compile_schema(
     let schema_ctx = schema_context.borrow();
     let mut interpreted: Vec<FrozenUnit> = vec![];
 
+    let namespace = schema_ctx.namespace_joined();
+    {
+        // TODO: Goal here is to check if there are namespaces colliding within schemas
+        //       which should be improbable if its source tree based, so think about if
+        //       its necessary to check
+        /*
+        let relative_schema =
+            project_context.find_schema_by_import(&namespace).unwrap();
+
+        if relative_schema.is_some() {
+            return report::colliding_namespace_err(relative_schema)
+        }
+        */
+        interpreted.push(FrozenUnit::Namespace(namespace));
+    }
+
     for spanned_unit in &schema_ctx.schema.1 {
         use crate::schema::idl::ast::unit::ASTUnit::*;
         match &spanned_unit.1 {
+            // TODO: ASTs are not supposed to have a namespace unit, because its automatically
+            //       decided based on source folder structure, remove this later
+            Namespace { .. } => { todo!() },
             Docstring {..} => { todo!() }
-            Namespace(span, namespace) => {
-                let relative_schema =
-                    project_context.find_schema_by_import(namespace).unwrap();
-
-                /*
-                if relative_schema.is_some() {
-                    return report::colliding_namespace_err(
-                        relative_schema
-                    )
-                }
-                */
-            }
             Import(s, i) => {
                 let Some(import_ctx)
                     = project_context.find_schema_by_import(i) else {

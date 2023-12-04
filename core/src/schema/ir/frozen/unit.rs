@@ -6,6 +6,7 @@ use crate::schema::ir::compiler::interpreted::kind_search::KindValue;
 
 // External Uses
 use serde_derive::{Serialize, Deserialize};
+use crate::package::config::ir::frozen::namespace;
 
 
 pub type FrozenContextWhole = (SchemaContext, Vec<FrozenUnit>);
@@ -108,3 +109,10 @@ pub fn schema_namespace(frozen: &[FrozenUnit]) -> Option<&str> {
     None
 }
 
+pub fn schema_namespace_as_path(frozen: &[FrozenUnit]) -> Option<String> {
+    let Some(namespace) = schema_namespace(frozen) else {
+        return None
+    };
+
+    Some(namespace.split("::").collect::<Vec<_>>().join("/"))
+}

@@ -13,6 +13,7 @@ fn compile_test_package_package_from_config() {
     let compiled = ProjectInterpreter::from_origin(&TEST_PACKAGE_CONFIG_PATH)
         .unwrap();
 
-    todo!()
     // pretty_assertions::assert_eq!(compiled, ());
+    
+    todo!()
 }

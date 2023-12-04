@@ -2,7 +2,7 @@
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 // Crate Uses
 use crate::schema::idl::ast::unit::{SourcedWholeRc, SpannedUnit};
@@ -23,10 +23,9 @@ pub struct CompileState {
     pub protocols: HashMap<Rc<SpannedUnit>, semi_frozen::Protocol>,
 }
 
-#[allow(unused)]
 impl CompileState {
     pub(crate) fn to_frozen(&self) -> Vec<FrozenUnit> {
-        let mut interpreted = vec![
+        let interpreted = vec![
             FrozenUnit::Namespace(self.namespace.clone().unwrap())
         ];
 
