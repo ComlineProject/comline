@@ -1,12 +1,6 @@
 congregation test
 specification_version = 1
 
-// schemas_source_path = "src/"
-schema_paths = [
-    "src/ping.ids"
-    "src/health.ids"
-]
-
 code_generation = {
     languages = {
         python#3.11.0 = { package_versions=[all] }

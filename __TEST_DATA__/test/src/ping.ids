@@ -1,7 +1,5 @@
 // Ping Schema
-namespace test::idl::ping
-
-import test::idl::health
+import package::idl::health
 
 const LOW_PING_RATE: u16 = 20
 

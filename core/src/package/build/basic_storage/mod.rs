@@ -46,7 +46,7 @@ pub fn process_changes(
     let latest_version_path = versions_path.join(latest_version.to_string());
     std::fs::create_dir_all(&latest_version_path)?;
 
-    package::freeze_and_compare_project(
+    package::freeze_and_compare_packages(
         &previous_project, &previous_schemas,
         &latest_project,
         &latest_version_path

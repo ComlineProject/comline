@@ -2,10 +2,6 @@
 // so its not necessary to do this manually
 tag 0563125512
 
-// Namespacing for the package as per usual schemas do
-namespace examples.thing.basic
-
-
 settings {
     // This option makes so messages(consequentially structs) by default do not require to specify a succession index,
     // and so this makes that both caller and provider are required to communicate on the same schema version

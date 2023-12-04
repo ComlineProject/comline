@@ -5,7 +5,7 @@ use std::path::Path;
 use crate::schema::ir::frozen::unit::FrozenUnit;
 
 // External Uses
-use eyre::{anyhow, Context, Result};
+use eyre::{Result, Context, eyre};
 
 
 /// Load all schema frozen units from a specific version's frozen schemas directory
@@ -24,6 +24,16 @@ pub fn all_from_version_frozen(version_path: &Path) -> Result<Vec<Vec<FrozenUnit
 
     let mut schemas = vec![];
 
+    let ent = glob::glob(&*format!("{}/**/*", schemas_path.display()))?;
+    for result in ent {
+        let entry = result?;
+        if entry.is_dir() { continue }
+
+        let frozen_schema = from_schema_frozen(&entry)?;
+        schemas.push(frozen_schema);
+    }
+
+    /*
     let entries = std::fs::read_dir(&schemas_path)
         .with_context(||
             format!("Couldn't read version frozen data at '{}'", schemas_path.display())
@@ -34,13 +44,14 @@ pub fn all_from_version_frozen(version_path: &Path) -> Result<Vec<Vec<FrozenUnit
 
         if !schema_path.is_file() {
             panic!(
-                "Expected a frozen schema file but got something else instead at '{:?}'",
+                "Expected a frozen schema file but got a directory or something else instead at '{:?}'",
                 &schema_path
             )
         }
 
         schemas.push(from_schema_frozen(&schema_path)?);
     }
+    */
 
     Ok(schemas)
 }
@@ -48,7 +59,7 @@ pub fn all_from_version_frozen(version_path: &Path) -> Result<Vec<Vec<FrozenUnit
 pub(crate) fn from_schema_frozen(schema_path: &Path) -> Result<Vec<FrozenUnit>> {
     let schema = std::fs::read(schema_path)?;
     let schema_frozen  = rmp_serde::from_slice(&schema)
-        .map_err(|e| anyhow!(e));
+        .map_err(|e| eyre!(e));
 
     schema_frozen
 }

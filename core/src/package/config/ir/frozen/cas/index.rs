@@ -6,7 +6,7 @@ use std::collections::HashMap;
 use crate::project::ir::frozen::FrozenUnit;
 
 // External Uses
-use eyre::{anyhow, Result};
+use eyre::{Result, eyre};
 use rmp_serde::Serializer;
 use serde_derive::{Serialize, Deserialize};
 
@@ -28,7 +28,7 @@ impl Index {
             );
         }
 
-        rmp_serde::from_slice(&contents).map_err(|e| anyhow!(e))
+        rmp_serde::from_slice(&contents).map_err(|e| eyre!(e))
     }
 
     pub fn to_processed(&self) -> (String, Vec<u8>) {

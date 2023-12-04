@@ -13,12 +13,15 @@ use crate::package::config::ir::interpreter::ProjectInterpreter;
 use crate::package::config::ir::{
     compiler, compiler::Compile,
     frozen as frozen_project,
-    frozen::basic_storage as basic_storage_project
+    frozen::basic_storage as basic_storage_project,
+    context::ProjectContext
 };
-use crate::package::config::ir::context::ProjectContext;
 use crate::schema::idl;
-use crate::schema::ir::frozen::basic_storage as basic_storage_schema;
-use crate::schema::ir::context::SchemaContext;
+use crate::schema::idl::constants::SCHEMA_EXTENSION;
+use crate::schema::ir::{
+    frozen::basic_storage as basic_storage_schema,
+    context::SchemaContext
+};
 use crate::codelib_gen::{find_generator, GeneratorFn};
 
 // External Uses
@@ -32,31 +35,31 @@ use serde_derive::{Serialize, Deserialize};
 /// - Freeze the results into frozen objects
 /// - Generate code for targets (optional)
 /// - Document changes (optional)
-pub fn build(project_path: &Path) -> Result<ProjectContext> {
-    let config_path = project_path.join(
+pub fn build(package_path: &Path) -> Result<ProjectContext> {
+    let config_path = package_path.join(
         format!("config.{}", CONGREGATION_EXTENSION)
     );
 
     if !config_path.exists() {
         bail!(
             "Package directory has no configuration file {:?} at \"{}\"",
-            config_path.file_name().unwrap(), project_path.display()
+            config_path.file_name().unwrap(), package_path.display()
         )
     }
 
     let latest_project = ProjectInterpreter::from_origin(&config_path)?;
 
     unsafe {
-        interpret_schemas(&latest_project, project_path)?;
+        interpret_schemas(&latest_project, package_path)?;
     }
 
 
     // TODO: This basic storage setup is temporary, it helps in getting development going
     //       in the rest of things, but it should definitely be substituted with the CAS
-    if basic_storage_project::has_any_frozen_content(project_path) {
-        basic_storage::process_changes(&project_path, &latest_project)?;
+    if basic_storage_project::has_any_frozen_content(package_path) {
+        basic_storage::process_changes(&package_path, &latest_project)?;
     } else {
-        basic_storage::process_initial_freezing(&project_path, &latest_project)?;
+        basic_storage::process_initial_freezing(&package_path, &latest_project)?;
     }
 
 
@@ -71,18 +74,39 @@ pub fn build(project_path: &Path) -> Result<ProjectContext> {
 unsafe fn interpret_schemas(
     compiled_project: &ProjectContext, package_path: &Path
 ) -> Result<()> {
+    // TODO: Decide if package configurations should be able to change the source of schemas
+    //       and/or how to look for them
+    /*
     let schema_paths = frozen_project::schema_paths(
         compiled_project.config_frozen.as_ref().unwrap()
     );
+    */
+    let schemas_path = format!("{}/src/", package_path.display());
+    let schemas_path = Path::new(&*schemas_path);
+    let mut schema_paths = vec![];
+
+    let pattern = format!("{}/**/*.{}", schemas_path.display(), SCHEMA_EXTENSION);
+    for result in glob::glob(&*pattern)? {
+        let schema_path = result?;
+        if !schema_path.is_file() {
+            bail!("Expected a schema file but got a directory at '{}'", schema_path.display())
+        }
+        let relative_path = schema_path.strip_prefix(schemas_path)?
+            .to_path_buf();
+
+        let parts = relative_path.with_extension("").components()
+            .map(|c| format!("{}", c.as_os_str().to_str().unwrap()))
+            .collect::<Vec<_>>();
+
+        schema_paths.push((relative_path, parts));
+    }
+
     for relative in schema_paths {
-        let concrete = format!("{:}/{}", package_path.to_str().unwrap(), relative);
-        let concrete_path = Path::new(&concrete);
+        let concrete_path = schemas_path.join(relative.0);
 
-        let ast = idl::parser_new::from_path(concrete_path)?;
+        let ast = idl::parser_new::from_path(&concrete_path)?;
 
-        let context = SchemaContext::with_ast(
-            ast, concrete_path.file_stem().unwrap().to_str().unwrap().to_owned()
-        );
+        let context = SchemaContext::with_ast(ast, relative.1);
 
         let ptr = compiled_project as *const ProjectContext;
         let ptr_mut = ptr as *mut ProjectContext;
@@ -105,7 +129,6 @@ pub fn freeze_project_auto(
     )
 }
 
-#[allow(unused)]
 fn generate_code_for_targets(
     compiled_project: &ProjectContext,
     base_path: &Path
@@ -164,7 +187,6 @@ pub fn resolve_path_query(query: &Option<String>, args: Args) -> Result<String, 
     }
 }
 
-#[allow(unused)]
 pub fn generate_code_for_context(
     context: &ProjectContext,
     generator: &GeneratorFn, extension: &str,
@@ -176,7 +198,7 @@ pub fn generate_code_for_context(
         let schema_ctx = schema_context.borrow();
         let frozen_schema = schema_ctx.frozen_schema.as_ref().unwrap();
         let file_path = target_path.join(
-            format!("{}.{}", &schema_ctx.name, extension)
+            format!("{}.{}", &schema_ctx.namespace.join("/"), extension)
         );
 
         let code = &*generator(frozen_schema);

@@ -47,6 +47,7 @@ pub fn interpret_assignment(
             todo!()
         }
         */
+        /*
         "schema_paths" => {
             let AssignmentUnit::List(paths) = &node.1 else {
                 panic!("'schema_paths' should be a list of paths, got something else instead.")
@@ -67,6 +68,7 @@ pub fn interpret_assignment(
 
             solved
         },
+        */
         "code_generation" => {
             let AssignmentUnit::Dictionary(items) = &node.1 else {
                 panic!("Expected dictionary, got something else instead")

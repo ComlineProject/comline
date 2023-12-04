@@ -19,7 +19,6 @@ use pest_derive::Parser;
 pub struct SchemaParser;
 
 
-#[allow(unused)]
 pub fn from_path(path: &Path) -> Result<SourcedWholeRc> {
     if !path.exists() { bail!("Path doesn't exist: {:?}", path) }
     let source = std::fs::read_to_string(path).unwrap();
@@ -52,6 +51,7 @@ pub fn parse_source(source: String, name: String) -> Result<SourcedWholeRc> {
 #[allow(unused)]
 pub fn parse_inner(pair: Pair<'_, Rule>, file: &Arc<FileMap>) -> Result<SpannedUnit> {
     match pair.as_rule() {
+        /*
         Rule::namespace => {
             let span = pair.as_span();
             let namespace_pair = pair.into_inner().next().unwrap();
@@ -66,6 +66,7 @@ pub fn parse_inner(pair: Pair<'_, Rule>, file: &Arc<FileMap>) -> Result<SpannedU
                 )
             ))
         },
+        */
         Rule::import => {
             let span = pair.as_span();
             let import_pair = pair.into_inner().next().unwrap();

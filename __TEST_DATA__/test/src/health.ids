@@ -1,5 +1,4 @@
 // Health Schema
-namespace test::idl::health
 
 struct Capabilities {
     names: str

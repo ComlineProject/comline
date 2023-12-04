@@ -13,7 +13,7 @@ use crate::package::config::ir::context::{Origin, ProjectContext};
 use crate::package::config::ir::compiler::Compile;
 
 // External Uses
-use eyre::{anyhow, Result};
+use eyre::{Result, eyre};
 
 
 #[allow(unused)]
@@ -32,7 +32,7 @@ impl Compile for ProjectInterpreter {
     fn from_sourced_whole(sourced: SourcedWhole) -> Self::Output {
         let mut context = ProjectContext::with_config(sourced);
         context.config_frozen = Some(interpret::interpret_context(&context)
-            .map_err(|e| anyhow!("{:?}", e))?);
+            .map_err(|e| eyre!("{:?}", e))?);
 
         Ok(context)
     }
@@ -52,7 +52,7 @@ impl Compile for ProjectInterpreter {
             Origin::Disk(origin.to_path_buf()), sourced
         );
         context.config_frozen = Some(interpret::interpret_context(&context)
-            .map_err(|e| anyhow!("{:?}", e))?);
+            .map_err(|e| eyre!("{:?}", e))?);
 
         Ok(context)
     }

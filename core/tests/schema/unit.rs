@@ -185,7 +185,6 @@ fn from_raw_to_unit() {
 }
 
 
-#[allow(unused)]
 #[test]
 fn compile_unit() {
     let path = &format!("tests/idl/simple.{}", SCHEMA_EXTENSION);
@@ -193,7 +192,7 @@ fn compile_unit() {
     let unit = idl::parser_new::from_path(path).unwrap();
 
     let context = ir::context::SchemaContext::with_ast(
-        unit, path.file_stem().unwrap().to_str().unwrap().to_owned()
+        unit, vec![path.file_stem().unwrap().to_str().unwrap().to_owned()]
     );
 
     /*

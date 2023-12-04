@@ -2,6 +2,7 @@
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
+use std::path::{Path, PathBuf};
 
 // Crate Uses
 use crate::schema::idl::ast::unit::{SourcedWholeRc, SpannedUnit};
@@ -43,18 +44,27 @@ impl CompileState {
 
 #[derive(Debug, Clone)]
 pub struct SchemaContext {
-    pub name: String,
+    //pub name: String,
+    pub namespace: Vec<String>,
     pub schema: SourcedWholeRc,
     pub frozen_schema: Option<Vec<FrozenUnit>>,
     // pub project_context: Option<&'a RefCell<ProjectContext<'a>>>,
     pub compile_state: RefCell<CompileState>
 }
 
-#[allow(unused)]
 impl SchemaContext {
+    pub fn with_ast(schema: SourcedWholeRc, namespace: Vec<String>) -> Self {
+        Self { namespace, schema, frozen_schema: None, compile_state: Default::default() }
+    }
+    /*
     pub fn with_ast(schema: SourcedWholeRc, name: String) -> Self {
         Self { name, schema, frozen_schema: None, compile_state: Default::default() }
     }
+    */
+
+    pub fn namespace_joined(&self) -> String { self.namespace.join("::") }
+    pub fn namespace_as_path(&self) -> PathBuf { PathBuf::from(&self.namespace.join("/")) }
+
 
     pub(crate) fn sanitize_units(self) {
         todo!()

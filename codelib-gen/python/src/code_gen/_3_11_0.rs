@@ -7,7 +7,7 @@ use crate::utils;
 use comline::schema::ir::frozen::unit::{FrozenArgument, FrozenUnit};
 use comline::schema::ir::compiler::interpreted::kind_search::KindValue;
 
-use eyre::anyhow;
+use eyre::eyre;
 
 
 #[allow(unused)]
@@ -135,7 +135,7 @@ fn from_frozen_kind_to_python_kind(kind_value: &KindValue) -> eyre::Result<Strin
         KindValue::Primitive(primitive) => {
             let name = primitive.name();
             from_frozen_primitive_to_ctypes(name)
-                .ok_or_else(|| anyhow!("No primitive equivalent found for {name}"))?
+                .ok_or_else(|| eyre!("No primitive equivalent found for {name}"))?
         }
         KindValue::EnumVariant(_, _) => {
             todo!()

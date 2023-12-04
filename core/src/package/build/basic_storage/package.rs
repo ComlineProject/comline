@@ -14,7 +14,7 @@ use crate::schema::ir::frozen::{
 };
 
 // External Uses
-use eyre::Result;
+use eyre::{Context, Result};
 
 
 pub(crate) fn freeze_project(
@@ -60,7 +60,7 @@ pub(crate) fn freeze_project(
         let frozen_meta = basic_storage_schema::serialize::to_processed(
             schema_ref.frozen_schema.as_ref().unwrap()
         );
-        let schema_path = schemas_path.join(&schema_ref.name);
+        let schema_path = schemas_path.join(&schema_ref.namespace_joined());
 
         std::fs::write(schema_path, frozen_meta)?;
     }
@@ -69,8 +69,7 @@ pub(crate) fn freeze_project(
 }
 
 
-#[allow(unused)]
-pub(crate) fn freeze_and_compare_project(
+pub(crate) fn freeze_and_compare_packages(
     previous_project: &[ProjectFrozenUnit], previous_schemas: &[Vec<SchemaFrozenUnit>],
     latest_project_ctx: &ProjectContext,
     latest_version_path: &Path
@@ -82,7 +81,9 @@ pub(crate) fn freeze_and_compare_project(
     std::fs::write(config_path, frozen_project_processed)?;
 
     let schemas_path = latest_version_path.join("schemas");
-    std::fs::create_dir_all(&schemas_path);
+    std::fs::create_dir_all(&schemas_path).with_context(|| {
+        format!("Could not create frozen schemas directory at '{}'", schemas_path.display())
+    })?;
 
     for schema_ctx in &latest_project_ctx.schema_contexts {
         let schema_ref = schema_ctx.borrow();
@@ -95,8 +96,19 @@ pub(crate) fn freeze_and_compare_project(
         let frozen_meta = basic_storage_schema::serialize::to_processed(
             schema_ref.frozen_schema.as_ref().unwrap()
         );
-        let schema_path = schemas_path.join(&schema_ref.name);
-        std::fs::write(schema_path, frozen_meta)?;
+
+        let schema_path = schemas_path.join(&schema_ref.namespace_as_path());
+
+        std::fs::create_dir_all(&schema_path.parent().unwrap()).with_context(|| {
+            format!(
+                "Could not create frozen schema parent directories at '{}",
+                schema_path.parent().unwrap().display()
+            )
+        })?;
+
+        std::fs::write(&schema_path, frozen_meta).with_context(|| {
+            format!("Could not write frozen schema to path '{}'", schema_path.display())
+        })?;
     }
 
     Ok(())

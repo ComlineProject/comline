@@ -1,18 +1,13 @@
-// IDL grammar
+// Interface Definition Language (also known as Schema) grammar
 schema = _{
 	COMMENT* ~ MULTILINE_COMMENT*
     ~ WS?
-    ~ namespace
     ~ (
     	COMMENT | import
         | settings | constant
         | validator | enumeration
         | structure | error | protocol
       )*
-}
-
-namespace = {
-	"namespace" ~ WS ~ domain
 }
 
 import = {
