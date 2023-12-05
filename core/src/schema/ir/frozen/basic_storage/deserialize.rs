@@ -5,7 +5,7 @@ use std::path::Path;
 use crate::schema::ir::frozen::unit::FrozenUnit;
 
 // External Uses
-use eyre::{Result, Context, eyre};
+use eyre::{Result, eyre};
 
 
 /// Load all schema frozen units from a specific version's frozen schemas directory

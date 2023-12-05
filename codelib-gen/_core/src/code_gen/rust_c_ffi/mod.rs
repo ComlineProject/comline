@@ -4,20 +4,38 @@ use std::path::Path;
 // Crate Uses
 
 // External Uses
+use comline_core::schema;
 use comline_core::schema::ir::frozen::unit::{FrozenUnit as SchemaUnit};
 
-use eyre::Result;
+use eyre::{Context, Result};
 
 
 pub fn to_schemas_ffi(generation_path: &Path, schemas: &[Vec<SchemaUnit>]) -> Result<()> {
-    let mut result = vec![];
+    let mut generated = vec![];
 
     for schema in schemas {
-        result.push(to_schema_code(schema));
+        let namespace = schema::ir::frozen::unit::schema_namespace_as_path(schema)
+            .unwrap();
+
+        generated.push((namespace, to_schema_code(schema)));
     }
 
-    for res in result {
-        println!("Res: {res}")
+    for (namespace, code) in generated {
+        let schema_code_path = generation_path.join(format!("src/{}.rs", namespace));
+
+        std::fs::create_dir_all(&schema_code_path.parent().unwrap()).with_context(|| {
+            format!(
+                "Could not create generated schema code directory at '{}'",
+                schema_code_path.parent().unwrap().display()
+            )
+        })?;
+
+        std::fs::write(&schema_code_path, code).with_context(|| {
+            format!(
+                "Could not create generated schema code directory at '{}'",
+                schema_code_path.parent().unwrap().display()
+            )
+        })?;
     }
 
     Ok(())

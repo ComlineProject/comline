@@ -5,12 +5,12 @@ pub mod cargo;
 use std::path::Path;
 
 // Crate Uses
-use crate::code_gen;
+use crate::{code_gen, lib_gen};
 
 // External Uses
 use comline_core::package::config::ir::frozen::basic_storage as basic_storage_package;
 
-use eyre::{Result, bail};
+use eyre::{Result, bail, Context};
 
 
 pub fn generate_frozen_package_into(package_path: &Path, generation_path: &Path) -> Result<()> {
@@ -28,6 +28,12 @@ pub fn generate_frozen_package_into(package_path: &Path, generation_path: &Path)
     if !latest_version_path.exists() {
         bail!("No version directory exists at {:?}", latest_version_path)
     }
+
+    std::fs::create_dir_all(generation_path).with_context(|| {
+        format!("Could not create generation directory at '{}'", generation_path.display())
+    })?;
+
+    cargo::generate_cargo_project(package_path, generation_path)?;
 
     code_gen::rust::generate_frozen_schemas_into_path(&latest_version_path, generation_path)?;
 

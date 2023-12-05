@@ -1,0 +1,15 @@
+# Generated with Comline compiler and code generator
+#
+# Advisory: This file is hashed and should not be manually edited, the runtime will complain
+# and might not even run if so (this is to be decided yet)
+
+
+[package]
+name = ""
+version = ""
+edition = "2021"
+
+[dependencies]
+comline-core = { path = "../../../../../../core" }
+comline-runtime = { path = "../../../../../../runtime/core" }
+abi_stable = { version = "^0.11.2" }

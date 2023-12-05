@@ -15,7 +15,7 @@ use toml_edit::{Document, Array, table, value};
 pub fn generate_cargo_project(
     name: &str, version: &str, target: &Path, schemas: &Vec<FrozenSchema>
 ) -> Result<()> {
-    let cargo_config_path = target.join("cargo.toml");
+    let cargo_config_path = target.join("Cargo.toml");
     std::fs::write(cargo_config_path, generate_cargo_config(name, version))?;
 
     let src_path = target.join("src/");

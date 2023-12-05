@@ -6,7 +6,6 @@ use crate::schema::ir::compiler::interpreted::kind_search::KindValue;
 
 // External Uses
 use serde_derive::{Serialize, Deserialize};
-use crate::package::config::ir::frozen::namespace;
 
 
 pub type FrozenContextWhole = (SchemaContext, Vec<FrozenUnit>);

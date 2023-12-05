@@ -6,7 +6,7 @@ use std::collections::HashMap;
 use std::path::Path;
 
 // Crate Uses
-use crate::code_gen;
+use crate::{code_gen, utils};
 use crate::code_gen::VersionGenerators;
 
 // External Uses
@@ -29,6 +29,12 @@ pub fn generate_frozen_schemas_into_path(
     version_path: &Path, generation_path: &Path
 ) -> Result<()> {
     let src_path = generation_path.join("src/");
+    std::fs::create_dir(&src_path).with_context(|| {
+        format!("Could not create crate src directory at '{}'", src_path.display())
+    })?;
+
+    let mut lib_mod = utils::generation_note("//");
+
     let schemas = basic_storage_schema::deserialize::all_from_version_frozen(
         &version_path
     )?;
@@ -54,7 +60,14 @@ pub fn generate_frozen_schemas_into_path(
                 schema_code_path.display()
             )
         })?;
+
+        lib_mod.push_str(&*format!("pub mod {};\n", namespace))
     }
+
+    let lib_mod_path = src_path.join("lib.rs");
+    std::fs::write(&lib_mod_path, lib_mod).with_context(|| {
+        format!("Could not create crate lib module at '{}'", lib_mod_path.display())
+    })?;
 
     Ok(())
 }

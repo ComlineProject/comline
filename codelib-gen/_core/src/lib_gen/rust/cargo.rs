@@ -8,7 +8,7 @@ use crate::utils;
 use comline_core::package::config::ir::frozen::basic_storage as basic_storage_package;
 use comline_core::package::config::ir::frozen::FrozenUnit as FrozenPackageUnit;
 
-use eyre::{bail, Result};
+use eyre::{Result, Context, bail};
 use toml_edit::{Document, table, value};
 
 
@@ -16,11 +16,10 @@ use toml_edit::{Document, table, value};
 pub fn generate_cargo_project(package_path: &Path, generation_path: &Path) -> Result<()> {
     let cargo_config = generate_latest_frozen_version_cargo_config(package_path)?;
 
-    let cargo_config_path = generation_path.join("cargo.toml");
-    std::fs::write(cargo_config_path, cargo_config)?;
-
-    let src_path = generation_path.join("src/");
-    std::fs::create_dir(src_path)?;
+    let cargo_config_path = generation_path.join("Cargo.toml");
+    std::fs::write(&cargo_config_path, cargo_config).with_context(|| {
+        format!("Could not create cargo configuration at '{}'", cargo_config_path.display())
+    })?;
 
     Ok(())
 }
@@ -78,8 +77,13 @@ fn generate_specific_frozen_version_cargo_config(
 
 
     config["dependencies"] = table();
-    config["dependencies"]["comline"]["path"] = value("../core");
-    config["dependencies"]["comline-runtime"]["path"] = value("../runtime");
+    // TODO: Use versions instead of local paths when they are published on a register
+    //config["dependencies"]["comline-core"] = value("0.1.0");
+    //config["dependencies"]["comline-runtime"] = value("0.1.0");
+
+    config["dependencies"]["comline-core"]["path"] = value("../../../../../../core");
+    config["dependencies"]["comline-runtime"]["path"] = value("../../../../../../runtime/core");
+
     config["dependencies"]["abi_stable"]["version"] = value("^0.11.2");
 
     let output = format!("{}\n\n{}", utils::generation_note("#"), config.to_string());

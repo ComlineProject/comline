@@ -19,6 +19,10 @@ static TEST_PACKAGE_BUILD_PATH: Lazy<PathBuf> = Lazy::new(||
     Path::new("tests/__TEMP__/test_package/build/").to_path_buf()
 );
 
+static TEST_PACKAGE_CRATE_BUILD_PATH: Lazy<PathBuf> = Lazy::new(||
+    Path::new("tests/__TEMP__/test_package/crate_build").to_path_buf()
+);
+
 /*
 #[test]
 pub fn build_test_lib() {
