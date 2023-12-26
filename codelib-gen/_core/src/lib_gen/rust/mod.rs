@@ -16,7 +16,13 @@ use eyre::{Result, bail, Context};
 pub fn generate_frozen_package_into(package_path: &Path, generation_path: &Path) -> Result<()> {
     let frozen_path = package_path.join(".frozen/");
     if !frozen_path.exists() {
-        panic!("Package {:?} has no '.frozen' directory", package_path)
+        bail!(
+            "Package {:?} has no '.frozen' directory, meaning it is not frozen,\n\
+            If it was not frozen before, please freeze it first,\
+            If it was frozen before, the frozen data might be lost and it will be treated as a fresh package.\n\
+            ",
+            package_path
+        )
     }
 
     let latest_version = basic_storage_package::get_latest_version(&frozen_path)

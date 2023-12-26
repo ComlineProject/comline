@@ -12,15 +12,23 @@ use once_cell::sync::Lazy;
 
 
 static TEST_PACKAGE_PATH: Lazy<PathBuf> = Lazy::new(||
-    Path::new("../../__TEST_DATA__/test/").to_path_buf()
+    PathBuf::from("../../__TEST_DATA__/test/")
 );
 
 static TEST_PACKAGE_BUILD_PATH: Lazy<PathBuf> = Lazy::new(||
-    Path::new("tests/__TEMP__/test_package/build/").to_path_buf()
+    PathBuf::from("tests/__TEMP__/test_package/build/")
 );
 
 static TEST_PACKAGE_CRATE_BUILD_PATH: Lazy<PathBuf> = Lazy::new(||
-    Path::new("tests/__TEMP__/test_package/crate_build").to_path_buf()
+    PathBuf::from("tests/__TEMP__/test_package/crate_build/")
+);
+
+static TEST_PACKAGE_CRATE_RUST_C_FFI_BUILD_PATH: Lazy<PathBuf> = Lazy::new(||
+    TEST_PACKAGE_CRATE_BUILD_PATH.join("c_ffi/")
+);
+
+static TEST_PACKAGE_CRATE_RUST_ABI_BUILD_PATH: Lazy<PathBuf> = Lazy::new(||
+    TEST_PACKAGE_CRATE_BUILD_PATH.join("rust_abi/")
 );
 
 /*

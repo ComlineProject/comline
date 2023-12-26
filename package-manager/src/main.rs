@@ -24,7 +24,7 @@ use clap::{Parser, Subcommand};
 #[derive(Parser)]
 #[command(name = "Comline Package Manager")]
 #[command(author = "Comline")]
-#[command(version = "0.0.1")]
+#[command(version = "0.1.1")]
 #[command(
     about = "Package Manager and Publisher tool for Comline (also compiles things)",
     long_about = None)

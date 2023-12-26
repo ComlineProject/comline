@@ -1,6 +1,7 @@
 // Compiled Languages
 pub mod rust;
 pub mod rust_c_ffi;
+pub mod rust_abi_stable;
 
 // Standard Uses
 use std::collections::HashMap;

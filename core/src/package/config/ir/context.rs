@@ -6,7 +6,7 @@ use std::path::PathBuf;
 // Crate Uses
 use crate::package::config::idl::ast::{SourcedWhole as ProjectSourcedWhole};
 use crate::package::config::ir::frozen::FrozenUnit;
-use crate::schema::idl::ast::unit::{ASTUnit as SchemaASTUnit, Details};
+// use crate::schema::idl::ast::unit::{ASTUnit as SchemaASTUnit, Details};
 use crate::schema::ir::context::SchemaContext;
 
 // External Uses

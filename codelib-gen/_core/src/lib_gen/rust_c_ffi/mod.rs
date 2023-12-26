@@ -16,15 +16,23 @@ use comline_core::{
     schema::ir::frozen::unit::{FrozenContextWhole as FrozenSchema},
 };
 
-use eyre::Result;
+use eyre::{Context, Result};
 
 
-/// Generates a package's frozen content into Rust code with C FFI compatibility as a crate
-pub fn generate_package_into_path(project_path: &Path, generation_path: &Path) -> Result<()> {
+/// Generates a package's frozen content into Rust code with C FFI support as a crate
+pub fn generate_package_into_path(package_path: &Path, generation_path: &Path) -> Result<()> {
+    std::fs::create_dir_all(&generation_path.parent().unwrap()).with_context(|| {
+        format!(
+            "Could not create package generated crate build directory at '{}'",
+            generation_path.display()
+        )
+    })?;
+
     let (_, frozen_schemas) =
-        package::config::ir::package_from_path_without_context(project_path)?;
+        package::config::ir::package_from_path_without_context(package_path)?;
 
     code_gen::rust_c_ffi::to_schemas_ffi(generation_path, &frozen_schemas)?;
+    code_gen::rust_c_ffi::tests::to_schemas_tests(generation_path, &frozen_schemas)?;
 
     Ok(())
 }

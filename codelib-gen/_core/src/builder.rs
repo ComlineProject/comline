@@ -6,7 +6,7 @@ use std::process::Command;
 // Crate Uses
 
 // External Uses
-use eyre::{bail, Result};
+use eyre::{Result, bail};
 
 
 #[allow(unused)]

@@ -1,23 +1,28 @@
 // Standard Uses
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 // Crate Uses
 
 // External Uses
-use comline_codelib_gen;
-use comline_codelib_gen_lua;
+use once_cell::sync::Lazy;
 
 
-const TEST_PACKAGE_DATA: &str = "__TEST_DATA__/test/";
-const TEST_PACKAGE_BUILD_PATH: &str = "tests/__DATA__/lua/test/";
+static TEST_PACKAGE_PATH: Lazy<PathBuf> = Lazy::new(||
+    PathBuf::from("../../__TEST_DATA__/test/")
+);
+
+static TEST_PACKAGE_BUILD_PATH: Lazy<PathBuf> = Lazy::new(||
+    PathBuf::from("tests/__TEMP__/test_package/build/")
+);
+
+static TEST_PACKAGE_CRATE_BUILD_PATH: Lazy<PathBuf> = Lazy::new(||
+    PathBuf::from("tests/__TEMP__/test_package/crate_build/")
+);
+
 
 
 #[test]
 pub fn build_test_package_lib() {
-    let package_path = Path::new(TEST_PACKAGE_DATA);
-    let build_path = Path::new(TEST_PACKAGE_BUILD_PATH);
-
-
     todo!()
 }
 

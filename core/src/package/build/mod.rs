@@ -12,7 +12,7 @@ use crate::package::config::idl::constants::CONGREGATION_EXTENSION;
 use crate::package::config::ir::interpreter::ProjectInterpreter;
 use crate::package::config::ir::{
     compiler, compiler::Compile,
-    frozen as frozen_project,
+    // frozen as frozen_project,
     frozen::basic_storage as basic_storage_project,
     context::ProjectContext
 };

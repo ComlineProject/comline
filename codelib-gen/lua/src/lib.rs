@@ -1,3 +1,3 @@
-fn main() {
-    println!("Hello, world!");
-}
+// Relative Modules
+pub mod code_gen;
+pub mod lib_gen;

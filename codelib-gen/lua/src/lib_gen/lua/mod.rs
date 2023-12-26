@@ -2,12 +2,13 @@
 use std::path::Path;
 
 // Crate Uses
-use crate::utils;
 
 // External Uses
-use comline::schema::ir::frozen::unit::{
+use comline_core::schema::ir::frozen::unit::{
     FrozenUnit as SchemaUnit, FrozenContextWhole as SchemaWhole
 };
+use comline_codelib_gen::utils;
+
 use eyre::Result;
 
 

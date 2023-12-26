@@ -10,7 +10,7 @@ const GENERATION_NOTE: &str = " Generated with Comline compiler and code generat
  and might not even run if so (this is to be decided yet)
 ";
 
-pub(crate) fn generation_note(prefix: &str) -> String {
+pub fn generation_note(prefix: &str) -> String {
     let mut note = String::new();
 
     for line in GENERATION_NOTE.lines() {

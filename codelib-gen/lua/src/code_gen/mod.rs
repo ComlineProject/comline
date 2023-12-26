@@ -2,16 +2,15 @@
 use std::path::Path;
 
 // Crate Uses
-use crate::utils;
 
 // External Uses
-use comline::schema::ir::frozen::unit::{
+use comline_core::schema::ir::frozen::unit::{
     FrozenUnit as SchemaUnit, FrozenContextWhole as SchemaWhole
 };
+use comline_codelib_gen::utils;
 use eyre::Result;
 
 
-#[allow(unused)]
 pub fn to_mlua_api(path: &Path, schemas: &Vec<SchemaWhole>) -> Result<()> {
     let mut details = vec![];
 
@@ -22,17 +21,16 @@ pub fn to_mlua_api(path: &Path, schemas: &Vec<SchemaWhole>) -> Result<()> {
     Ok(())
 }
 
-#[allow(unused)]
 pub fn to_mlua_api_module(path: &Path, schemas: &Vec<SchemaWhole>) -> String {
     let mut module = utils::generation_note("#");
     module += "use mlua::prelude::*\n\n";
 
     module += "#[mlua::lua_module]";
-    module += "fn my_module(lua: &Lua) -> LuaResult<LuaTable> {\n";
+    module += &*format!("fn {}(lua: &Lua) -> LuaResult<LuaTable> {{\n", "my_module");
     module += "\tlet exports = lua.create_table()?\n";
 
     for schema in schemas {
-        let name = &schema.0.name;
+        let name = &schema.0.namespace_snake();
         let code = to_mlua_module_table(schema);
 
         module += format!(
@@ -46,8 +44,7 @@ pub fn to_mlua_api_module(path: &Path, schemas: &Vec<SchemaWhole>) -> String {
     module
 }
 
-#[allow(unused)]
-pub fn to_mlua_module_table(schema: &SchemaWhole) -> String {
+fn to_mlua_module_table(schema: &SchemaWhole) -> String {
     let table = String::new();
 
     let mut namespace = None;
@@ -79,9 +76,7 @@ pub fn to_mlua_module_table(schema: &SchemaWhole) -> String {
     table
 }
 
-
-#[allow(unused)]
-pub(crate) fn from_unit_to_code(unit: &SchemaUnit) -> String {
+fn from_unit_to_code(unit: &SchemaUnit) -> String {
     let code = String::new();
 
     use SchemaUnit::*;

@@ -61,6 +61,7 @@ impl SchemaContext {
     }
     */
 
+    pub fn namespace_snake(&self) -> String { self.namespace.join("_") }
     pub fn namespace_joined(&self) -> String { self.namespace.join("::") }
     pub fn namespace_as_path(&self) -> PathBuf { PathBuf::from(&self.namespace.join("/")) }
 

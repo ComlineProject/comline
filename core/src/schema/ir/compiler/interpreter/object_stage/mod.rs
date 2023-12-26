@@ -49,7 +49,7 @@ pub fn compile_schema(
             Import(s, i) => {
                 let Some(import_ctx)
                     = project_context.find_schema_by_import(i) else {
-                    panic!("No schema found by import '{}'", i)
+                    panic!("No schema found by import '{}' at '{}'", i, s.0)
                 };
 
                 let relative_unit = project_context.find_schema_by_import(i);
