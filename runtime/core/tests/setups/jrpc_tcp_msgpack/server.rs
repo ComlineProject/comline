@@ -1,69 +1,27 @@
 // Standard Uses
 
 // Crate Uses
-use crate::setups::jrpc_tcp_msgpack::schemas::{
-    GreetConsumerProtocol, GreetProtocol, GreetProviderProtocol
+use crate::setups::jrpc_tcp_msgpack::generated::{
+    schemas::GreetProviderProtocol, provider::GreetProvider
 };
 
 // External Uses
-use eyre::Result;
-use comline_runtime::setup::call_system::meta::CallProtocolMeta;
-use comline_runtime::setup::communication::{MessageReceiver, MessageSender};
-use comline_runtime::setup::communication::provider::{ProviderCapability, ProviderSetup};
-use comline_runtime::setup::communication::methods::tcp::provider::TcpProvider;
-use comline_runtime::setup::communication::consumer::{ConsumerCapability, ConsumerSetup};
-use comline_runtime::setup::call_system::systems::json_rpc::JsonRPCv2;
-use comline_runtime::setup::message_format::msgpack::MessagePack;
+use comline_runtime::setup::APIResult;
+use comline_runtime::setup::{
+    communication::{methods::tcp::provider::TcpProvider, provider::ProviderSetup},
+    call_system::systems::json_rpc::JsonRPCv2,
+    message_format::msgpack::MessagePack
+};
 
 
-// These provider structures are just mimics of what Comline would generate
-pub struct GrootProvider;
-impl MessageReceiver for GrootProvider {}
-impl MessageSender for GrootProvider {}
-
-
-pub struct GreetProvider;
-
-impl GreetProtocol for GreetProvider {}
-impl ProviderCapability for GreetProvider {}
-impl MessageSender for GreetProvider {}
-impl MessageReceiver for GreetProvider {}
-impl CallProtocolMeta for GreetProvider {
-    fn calls(&self) -> &'static [&'static str] {
-        &["greet"]
-    }
-}
-
-#[allow(unused)]
-impl<'setup> GreetProviderProtocol for GreetProvider {
-    fn greet(&self, setup: &mut ProviderSetup, name: &str) -> Result<String> {
+impl GreetProviderProtocol for GreetProvider {
+    fn greet(&self, name: &str) -> APIResult<String> {
         println!("[Server] Received a greet request with name '{}'", name);
 
         Ok("Hello ".to_owned() + name)
     }
 }
 
-
-pub struct GreetConsumer;
-
-impl GreetProtocol for GreetConsumer {}
-impl ConsumerCapability for GreetConsumer {}
-impl MessageSender for GreetConsumer {}
-impl MessageReceiver for GreetConsumer {}
-impl CallProtocolMeta for GreetConsumer {
-    fn calls(&self) -> &'static [&'static str] {
-        &["greet"]
-    }
-}
-
-#[allow(unused)]
-impl GreetConsumerProtocol for GreetConsumer {
-    fn greet(&self, setup: &mut ConsumerSetup, name: &str) -> Result<String> {
-        setup.call_system.send_call(self, 0);
-
-        todo!()
-    }
-}
 
 
 pub(crate) async fn main() {

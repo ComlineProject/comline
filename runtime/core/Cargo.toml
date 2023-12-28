@@ -6,13 +6,18 @@ edition = "2021"
 
 
 [dependencies]
+# General
 eyre = "0.6.8"
 async-trait = "0.1.74"
 downcast-rs = "1.2.0"
-tokio = { version = "1.33.0", features = ["full"] }
+bytemuck = { version = "1.14.0", features = ["derive"] }
+
+# ABI
 abi_stable = "0.11.2"
 libloading = "0.8.0"
-bytemuck = { version = "1.14.0", features = ["derive"] }
+
+# Network
+tokio = { version = "1.33.0", features = ["full"] }
 
 # Call Systems
 json_rpc_v2 = "0.2.0"

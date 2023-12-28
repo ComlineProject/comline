@@ -3,11 +3,14 @@ use std::path::Path;
 
 // Crate Uses
 
+// Internal Uses
+use comline_runtime::package_abi::interface;
+use comline_runtime::package_abi::interface::PackageLibRef;
+
 // External Uses
 use mlua::prelude::*;
 use mlua::UserData;
-use comline_runtime::package_abi::interface::PackageLibRef;
-use comline_runtime::package_abi::interface;
+
 
 
 pub(crate) struct Handler {

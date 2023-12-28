@@ -1,14 +1,28 @@
 // Standard Uses
 
 // Crate Uses
-use crate::setups::jrpc_tcp_msgpack::server::GreetConsumer;
-use crate::setups::jrpc_tcp_msgpack::schemas::GreetConsumerProtocol;
+use crate::setups::jrpc_tcp_msgpack::generated::{
+    schemas::GreetConsumerProtocol,
+    consumer::GreetConsumer
+};
 
 // External Uses
+use comline_runtime::setup::APIResult;
+use comline_runtime::setup::communication::{
+    consumer::ConsumerSetup,
+    methods::tcp::consumer::TcpConsumer
+};
 use comline_runtime::setup::call_system::systems::json_rpc::JsonRPCv2;
-use comline_runtime::setup::communication::consumer::ConsumerSetup;
-use comline_runtime::setup::communication::methods::tcp::consumer::TcpConsumer;
 
+
+impl GreetConsumerProtocol for GreetConsumer {
+    fn greet(&self, name: &str) -> APIResult<String> {
+        // let setup: &mut ConsumerSetup = todo!();
+        // setup.call_system.send_call(self, 0);
+
+        todo!()
+    }
+}
 
 pub(crate) async fn main() {
     println!("Running Client");
@@ -38,18 +52,15 @@ pub(crate) async fn main() {
 }
 
 
-fn greet_with_name(mut setup: &mut ConsumerSetup) {
-    let greet_capability = setup.capability_mut::<GreetConsumer>();
+fn greet_with_name(setup: &mut ConsumerSetup) {
+    let greeter = setup.capability_mut::<GreetConsumer>().unwrap();
     let name = "Client";
 
     println!("[Client] Sending a greet request with name '{}'", name);
 
-    // TODO: Check how to flow mutability shared here
-    /*
-    let response = greet_capability.unwrap().greet(&mut setup, name).unwrap();
+    let response = greeter.greet(name).unwrap();
     println!("[Client] Received a greet response saying: '{}'", response);
 
     assert_eq!("Hello Client", response);
-    */
 }
 

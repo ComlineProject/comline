@@ -1,0 +1,10 @@
+[package]
+name = "comline-runtime-tests"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+comline-runtime = { path = "../../core" }
+eyre = "0.6.11"
+tokio = { version = "1.35.1", features = ["macros"] }

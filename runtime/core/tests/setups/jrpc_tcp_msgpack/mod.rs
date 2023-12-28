@@ -1,5 +1,5 @@
 // Relative Modules
-mod schemas;
+mod generated;
 mod server;
 mod client;
 

@@ -7,14 +7,16 @@ members = [
     "codelib-gen/_core",
     "codelib-gen/c",
     "codelib-gen/lua",
-    "codelib-gen/luau",
-    "codelib-gen/python",
-    "runtime/core",
-    "runtime/test_rt_dylib",
-    "runtime-langs/luau",
-    "runtime-langs/python",
+    #"codelib-gen/luau",
+    #"codelib-gen/python",
     "package-manager",
-    "package-server"
+    "package-server",
+    "runtime/core",
+    "runtime/tests/provider_consumer",
+    #"runtime/tests/test_rt_dylib",
+    "runtime-langs/lua",
+    #"runtime-langs/luau",
+    #"runtime-langs/python",
 ]
 
 [profile.release]

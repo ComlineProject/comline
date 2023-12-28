@@ -7,8 +7,9 @@ edition = "2021"
 
 
 [dependencies]
+comline-runtime = { path = "../../core" }
 abi_stable = "0.11.2"
-comline-runtime = { path = "../core" }
+tokio = { version = "1.35.1", features = ["macros"] }
 
 [lib]
 name = "test_runtime_dylib"

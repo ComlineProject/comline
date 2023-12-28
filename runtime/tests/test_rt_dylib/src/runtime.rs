@@ -1,9 +1,8 @@
-// Generated with Comline compiler and code generator
+// Standard Uses
 
-// Relative Modules
-pub mod health;
-pub mod ping;
+// Crate Uses
 
+/*
 // External Uses
 use abi_stable::{
     export_root_module, prefix_type::PrefixTypeTrait, sabi_extern_fn,
@@ -30,4 +29,4 @@ pub fn get_library() -> PackageLibRef {
 pub fn to_message(data: RVec<u8>) -> MessageBox {
     Message_TO::from_value(RVec::new(), TD_Opaque)
 }
-
+*/

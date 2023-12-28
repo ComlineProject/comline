@@ -9,7 +9,6 @@
       <sourceFolder url="file://$MODULE_DIR$/package-manager/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime/core/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime/core/tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/runtime/test_rt_dylib/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/package-server/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime/core/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/codelib-gen/_core/src" isTestSource="false" />
@@ -25,6 +24,9 @@
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/luau/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/luau/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/python/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/runtime-langs/lua/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/runtime/tests/provider_consumer/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/runtime/tests/test_rt_dylib/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/core/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/codelib-gen/_core/target" />
