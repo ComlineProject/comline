@@ -12,7 +12,7 @@ use comline_runtime::setup::{APIResult, communication::{
     consumer::{ConsumerSetup, SharedConsumerSetup},
     methods::tcp::consumer::TcpConsumer
 }, call_system::{
-    CallSystemSender,
+    CallSystemProvider,
     systems::json_rpc::JsonRPCv2
 }, call_system};
 
@@ -22,7 +22,8 @@ impl GreetConsumerProtocol for GreetConsumer {
         let mut caller = self.caller.write().unwrap();
 
         let message: String = call_system::make_parameters(&mut *caller, &[name.to_owned()]);
-        call_system::send_blocking_call(&mut *caller, "greet", message)
+        caller.send_blocking_call("greet", &*message)
+        //call_system::send_blocking_call(&mut *caller, "greet", message)
     }
 
     /*

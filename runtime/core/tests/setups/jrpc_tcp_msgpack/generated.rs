@@ -69,13 +69,13 @@ pub mod consumer {
             consumer::ConsumerCapability
         },
         call_system::{
-            CallSystem, CallSystemSender,
+            CallSystem, CallSystemProvider,
             meta::CallProtocolMeta
         },
     };
 
     pub struct GreetConsumer {
-        pub(crate) caller: Arc<RwLock<dyn CallSystemSender>>,
+        pub(crate) caller: Arc<RwLock<dyn CallSystemProvider>>,
         // pub(crate) setup: SharedConsumerSetup,
     }
     impl GreetConsumer {
@@ -84,7 +84,7 @@ pub mod consumer {
             GreetConsumer { setup }
         }
         */
-        pub fn new(caller: Arc<RwLock<dyn CallSystemSender>>) -> Self { Self { caller } }
+        pub fn new(caller: Arc<RwLock<dyn CallSystemProvider>>) -> Self { Self { caller } }
     }
 
     impl GreetProtocol for GreetConsumer {}

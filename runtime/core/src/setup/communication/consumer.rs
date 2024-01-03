@@ -2,8 +2,8 @@
 use std::sync::{Arc, RwLock};
 
 // Crate Uses
-use crate::setup::call_system::CallSystemSender;
 use crate::setup::communication::{MessageReceiver, MessageSender};
+use crate::setup::call_system::provider::CallSystemProvider;
 
 // External Uses
 use async_trait::async_trait;
@@ -13,11 +13,12 @@ use downcast_rs::{DowncastSync, impl_downcast};
 #[async_trait]
 pub trait CommunicationConsumer: Send + Sync {
     async fn connect_to_provider(&self);
+    async fn send_data(&self, data: &[u8]) -> eyre::Result<()>;
 }
 
 pub struct ConsumerSetup {
     pub transport_method: Arc<RwLock<dyn CommunicationConsumer>>,
-    pub call_system: Arc<RwLock<dyn CallSystemSender>>,
+    pub call_system: Arc<RwLock<dyn CallSystemProvider>>,
     // pub message_format: MessageFormat,
     pub capabilities: Vec<Box<dyn ConsumerCapability>>
 }
@@ -43,7 +44,7 @@ impl ConsumerSetup {
     */
 
     pub fn add_default_capability<C, Cfn>(mut self, capability: Cfn) -> Self
-        where C: ConsumerCapability, Cfn: FnOnce(Arc<RwLock<dyn CallSystemSender>>) -> C
+        where C: ConsumerCapability, Cfn: FnOnce(Arc<RwLock<dyn CallSystemProvider>>) -> C
     {
         self.capabilities.push(Box::new(capability(self.call_system.clone())));
         self

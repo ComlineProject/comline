@@ -88,14 +88,14 @@ pub mod provider {
                 /*
                 if length < Self::INCOMING_DATA_MIN_LEN {
                     panic!(
-                        "Incoming packet is not lengthy enough, got {} but expected at least {}",
+                        "Incoming packet is not big enough, got {} but expected at least {} bytes",
                         length, Self::INCOMING_DATA_MIN_LEN
                     )
                 }
                 */
 
                 println!(
-                    "[Server] {} - Incoming data ({} bytes, first 10 bytes: {:?}",
+                    "[Provider] {} - Incoming data ({} bytes, first 10 bytes: {:?}",
                     address, buf.len(), buf
                 );
 
@@ -152,6 +152,10 @@ pub mod consumer {
     #[async_trait]
     impl CommunicationConsumer for TcpConsumer {
         async fn connect_to_provider(&self) {
+            todo!()
+        }
+
+        async fn send_data(&self, data: &[u8]) -> Result<()> {
             todo!()
         }
     }
