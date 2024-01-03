@@ -1,5 +1,5 @@
 // Standard Uses
-use std::sync::Arc;
+use std::sync::{Arc, RwLock};
 
 // Crate Uses
 use crate::setup::communication::{MessageReceiver, MessageSender};
@@ -12,17 +12,16 @@ use downcast_rs::{DowncastSync, impl_downcast};
 
 
 #[async_trait]
-pub trait CommunicationProvider: Send + DowncastSync {
-    async fn listen_for_connections(
-        &mut self, call_system: &mut dyn CallSystem, message_format: &dyn MessageFormat);
+pub trait CommunicationProvider: DowncastSync {
+    async fn listen_for_connections(&mut self, /*call_system: &mut dyn CallSystem*/);
 }
 impl_downcast!(sync CommunicationProvider);
 
 
 pub struct ProviderSetup {
-    pub transport_method: Box<dyn CommunicationProvider>,
-    pub message_format: Box<dyn MessageFormat>,
-    pub call_system: Box<dyn CallSystem>,
+    pub transport_method: Arc<RwLock<dyn CommunicationProvider>>,
+    pub call_system: Arc<RwLock<dyn CallSystem>>,
+    pub message_format: Box<dyn MessageFormat>, // TODO: Does MessageFormat really need to be instantiated? Or just a parameter
     pub capabilities: Vec<Box<dyn MessageReceiver>>
 }
 
@@ -34,5 +33,7 @@ impl ProviderSetup {
     }
 }
 
-pub trait ProviderCapability: MessageSender + MessageReceiver {}
+pub trait ProviderCapability: MessageSender + MessageReceiver {
+    // fn setup(&self) -> Arc<RwLock<ProviderSetup>>;
+}
 

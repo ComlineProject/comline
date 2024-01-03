@@ -1,8 +1,7 @@
 // Standard Uses
-use std::sync::{Arc, RwLock};
 
 // Crate Uses
-use crate::setups::jrpc_tcp_msgpack::generated::{
+use crate::setups::jrpc_tcp::generated::{
     schemas::GreetProviderProtocol, provider::GreetProvider
 };
 
@@ -24,27 +23,20 @@ impl GreetProviderProtocol for GreetProvider {
 }
 
 
-
 pub(crate) async fn main() {
     println!("Running Server");
 
-    // Okay so first we need an address to bind and listen on
     let (address, port) = ("127.0.0.1", "2620");
     let full_address = &*(address.to_owned() + ":" + port);
 
+    let call_system = JsonRPCv2::default().into_threaded();
     let mut setup = ProviderSetup {
-        // To transport our messages, lets use TCP
         transport_method: TcpProvider::with_address(full_address).await.unwrap().into_threaded(),
-
-        // For serialization, lets use the Msgpack format
+            //.and_callback(|| &call_system.on_received_data),
         message_format: Box::new(MessagePack),
-
-        // For the call setup, lets use Json RPC
-        call_system: Arc::new(RwLock::new(JsonRPCv2::default())),
+        call_system,
         capabilities: vec![]
     };
-
-    // And the capabilities of communication
     setup.add_capabilities(vec![
         Box::new(GreetProvider)
     ]);
@@ -53,11 +45,9 @@ pub(crate) async fn main() {
 }
 
 async fn respond_to_incoming_hellos(setup: &mut ProviderSetup) {
-    // We re only downcasting here because we need to just listen to one connection and leave
-    // but in many cases it might not be necessary to downcast
-    let tcp_listener = setup.transport_method.read().unwrap();
-    let tcp_listener = &*tcp_listener.downcast_ref::<TcpProvider>().unwrap();
-
-    tcp_listener.listen_incoming_connection(/*&mut *setup.call_system*/).await
+    let provider = setup.transport_method.read().unwrap();
+    provider.downcast_ref::<TcpProvider>().unwrap()
+        .listen_incoming_connection(/*&mut *setup.call_system*/)
+        .await;
 }
 

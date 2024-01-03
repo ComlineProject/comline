@@ -1,3 +1,7 @@
+// Crate configuration
+//#![no_std]
+
+
 // Relative Modules
 /*
 pub mod prelude {

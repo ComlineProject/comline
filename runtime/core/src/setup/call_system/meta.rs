@@ -6,7 +6,7 @@
 
 
 pub trait CallProtocolMeta {
-    fn calls(&self) -> &'static [&'static str];
+    fn calls_names(&self) -> &'static [&'static str];
     // const ARGUMENTS: &'static [(usize, )];
 }
 

@@ -5,6 +5,11 @@ edition = "2021"
 # license = "Parity OR Prosperity"
 
 
+[features]
+default = ["std"]
+std = []
+
+
 [dependencies]
 # General
 eyre = "0.6.8"
@@ -26,6 +31,7 @@ json_rpc_v2 = "0.2.0"
 rmp = "0.8.12"
 rmp-serde = "1.1.2"
 serde = "1.0.190"
+jsonrpc = { version="0.16.0", default-features = false, features = ["base64"] }
 
 
 [dev-dependencies]

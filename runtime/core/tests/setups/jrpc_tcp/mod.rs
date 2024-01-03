@@ -5,7 +5,7 @@ mod client;
 
 
 #[tokio::test]
-async fn server_respond_hello_from_client() {
+async fn send_name_from_client_and_receive_hello_from_server() {
     // This entry point is just an example of simulation, you would do differently
     // if not simulating both parts
 

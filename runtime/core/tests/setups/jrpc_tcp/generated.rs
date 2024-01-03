@@ -31,16 +31,15 @@ pub mod provider {
     use super::schemas::GreetProtocol;
 
     // Internal Uses
-    use comline_runtime::setup::call_system::meta::CallProtocolMeta;
-    use comline_runtime::setup::communication::{
-        MessageReceiver, MessageSender,
-        provider::ProviderCapability
+    use comline_runtime::setup::{
+        call_system::meta::CallProtocolMeta
     };
-
-    pub struct GrootProvider;
-    impl MessageReceiver for GrootProvider {}
-    impl MessageSender for GrootProvider {}
-
+    use comline_runtime::setup::{
+        communication::{
+            MessageReceiver, MessageSender,
+            provider::ProviderCapability
+        }
+    };
 
     pub struct GreetProvider;
 
@@ -68,23 +67,12 @@ pub mod consumer {
             MessageReceiver, MessageSender,
             consumer::ConsumerCapability
         },
-        call_system::{
-            CallSystem, CallSystemSender,
-            meta::CallProtocolMeta
-        },
+        call_system::{CallSystem, meta::CallProtocolMeta},
     };
 
     pub struct GreetConsumer {
-        pub(crate) caller: Arc<RwLock<dyn CallSystemSender>>,
-        // pub(crate) setup: SharedConsumerSetup,
-    }
-    impl GreetConsumer {
-        /*
-        pub fn new(setup: ConsumerSetup) -> GreetConsumer {
-            GreetConsumer { setup }
-        }
-        */
-        pub fn new(caller: Arc<RwLock<dyn CallSystemSender>>) -> Self { Self { caller } }
+        #[allow(unused_variables)]
+        pub(crate) caller: Arc<RwLock<dyn CallSystem>>,
     }
 
     impl GreetProtocol for GreetConsumer {}
