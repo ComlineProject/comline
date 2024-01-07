@@ -1,7 +1,6 @@
 // Standard Uses
 use std::any::Any;
 use std::sync::{Arc, RwLock};
-use json_rpc_types::Id;
 
 // Crate Uses
 use crate::setup::APIResult;
@@ -11,6 +10,7 @@ use crate::setup::call_system::consumer::CallSystemConsumer;
 use crate::setup::message_format::Message;
 
 // External Uses
+use json_rpc_types::Id;
 
 
 type Request = json_rpc_types::Request<Vec<serde_json::Value>>;
@@ -66,6 +66,10 @@ impl CallSystemConsumer for JsonRPCv2 {
         let request = serde_json::to_vec(&request).unwrap();
         let req = serde_json::to_string(&request).unwrap();
 
+        //let response = None;
+        //let cb = move |data: &[u8]| { response = Some(data); };
+        // self.add_event_listener(EventType::ReceivedBytes(cb as _));
+
         match &self.transporter {
             Origin::Consumer(transporter) => {
                 let mut transporter = transporter.write().unwrap();
@@ -95,7 +99,9 @@ impl Callback for JsonRPCv2 {
 
         for listener in &self.event_listeners {
             match listener {
-                EventType::ReceivedBytes(cb) => cb(&*data),
+                EventType::ReceivedBytes(cb) => {
+                    // cb(&*data)
+                },
                 _ => panic!("How are we here, this is a runtime developer mistake")
             }
         }

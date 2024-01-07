@@ -14,7 +14,7 @@ use crate::setup::communication::provider::CommunicationProvider;
 
 // External Uses
 use downcast_rs::{DowncastSync, impl_downcast};
-
+use tokio::sync::watch;
 
 
 pub trait CallSystem: Send + DowncastSync {
@@ -37,7 +37,8 @@ pub const CALL_TIMEOUT: u128 = 800;
 
 pub enum EventType {
     //ReceivedBytes(Box<dyn FnMut(OnceLock<&[u8]>)>),
-    ReceivedBytes(fn(&[u8])),
+    //ReceivedBytes(fn(&[u8])),
+    ReceivedBytes(watch::Receiver<Box<[u8]>>),
     //ReceivedMessage,
     SentBytes(fn(&[u8])),
     //SentMessage
