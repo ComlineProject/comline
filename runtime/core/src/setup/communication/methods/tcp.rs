@@ -12,6 +12,7 @@ pub mod provider {
 
     // Crate Uses
     use crate::setup::communication::provider::CommunicationProvider;
+    use crate::setup::call_system::Callback;
 
     // External Uses
     use eyre::Result;
@@ -20,13 +21,13 @@ pub mod provider {
     use async_trait::async_trait;
 
 
-    pub struct TcpProvider /*<'root>*/ {
+    pub struct TcpProvider {
         listener: TcpListener,
         pub connection_count: usize,
-        data_received_callback: Vec</*&'root*/ fn(&[u8])>,
+        data_received_callback: Vec<Arc<RwLock<dyn Callback>>>,
     }
 
-    impl TcpProvider/*<'root>*/ {
+    impl TcpProvider {
         // const INCOMING_DATA_MIN_LEN: usize = 1;
 
         pub async fn with_address(
@@ -40,15 +41,13 @@ pub mod provider {
             })
         }
 
-        pub fn into_threaded(self) -> Arc<RwLock<Self>> { Arc::new(RwLock::new(self)) }
-
-        #[allow(unused)]
-        pub fn and_callback<'root, F>(mut self, callback_fn: F) -> Self
-            where F: FnOnce() -> &'root fn(&[u8])
+        pub fn and_callback(mut self, callback: Arc<RwLock<dyn Callback>>) -> Self
         {
-            //self.data_received_callback.push(callback_fn());
+            self.data_received_callback.push(callback);
             self
         }
+
+        pub fn into_threaded(self) -> Arc<RwLock<Self>> { Arc::new(RwLock::new(self)) }
 
         pub async fn listen_connections(&mut self, /*call_system: &mut dyn CallSystem*/) {
             loop { self.listen_incoming_connection(/*call_system*/).await }
@@ -74,13 +73,11 @@ pub mod provider {
             let mut buf = [0; 1024];
 
             loop {
-                // let mut buf = vec![];
-                let length = stream.read(&mut buf).await;
-
-                match length {
+                let length = match stream.read(&mut buf).await {
                     Ok(0) => return, // Stream closed
                     Ok(n) => n,
                     Err(e) => {
+                        // TODO: Shouldn't be a panic and needs to do proper error setup
                         panic!("Couldn't read on stream: {e}");
                     }
                 };
@@ -93,21 +90,26 @@ pub mod provider {
                     )
                 }
                 */
+                let data = &buf[..length];
 
                 println!(
                     "[Provider] {} - Incoming data ({} bytes, first 10 bytes: {:?}",
-                    address, buf.len(), buf
+                    address, length, &data
                 );
 
                 for callback in &self.data_received_callback {
-                    callback(&buf)
+                    callback.write().unwrap().on_received_data(&data)
                 }
             }
         }
     }
 
     #[async_trait]
-    impl CommunicationProvider for TcpProvider/*<'root>*/ {
+    impl CommunicationProvider for TcpProvider {
+        fn add_received_data_callback(&mut self, callback: Arc<RwLock<dyn Callback>>) {
+            self.data_received_callback.push(callback)
+        }
+
         async fn listen_for_connections(&mut self, /*call_system: &mut dyn CallSystem*/) {
             self.listen_connections(/*call_system*/).await;
         }
@@ -116,6 +118,7 @@ pub mod provider {
 
 pub mod consumer {
     // Standard Uses
+    use std::io::Write;
     use std::net::TcpStream;
     use std::sync::{Arc, RwLock};
 
@@ -127,7 +130,6 @@ pub mod consumer {
     use async_trait::async_trait;
 
 
-    #[allow(unused)]
     pub struct TcpConsumer {
         stream: TcpStream,
         data_received_callback: Vec<fn(&[u8])>,
@@ -155,7 +157,21 @@ pub mod consumer {
             todo!()
         }
 
-        async fn send_data(&self, data: &[u8]) -> Result<()> {
+        #[allow(unused)]
+        fn send_data(&mut self, data: &[u8]) -> Result<()> {
+            println!(
+                "Sending data ({} bytes, first 10: {:?}): {:?}",
+                data.len(), &data[..10], String::from_utf8_lossy(&data[..10])
+            );
+
+            self.stream.write_all(data)?;
+            self.stream.flush();
+
+            Ok(())
+        }
+
+        #[allow(unused)]
+        async fn send_data_async(&mut self, data: &[u8]) -> Result<()> {
             todo!()
         }
     }

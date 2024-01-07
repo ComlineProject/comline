@@ -10,7 +10,6 @@ use comline_runtime::setup::APIResult;
 use comline_runtime::setup::{
     communication::{methods::tcp::provider::TcpProvider, provider::ProviderSetup},
     call_system::systems::json_rpc::JsonRPCv2,
-    message_format::msgpack::MessagePack
 };
 
 
@@ -29,17 +28,12 @@ pub(crate) async fn main() {
     let (address, port) = ("127.0.0.1", "2620");
     let full_address = &*(address.to_owned() + ":" + port);
 
-    let call_system = JsonRPCv2::default().into_threaded();
-    let mut setup = ProviderSetup {
-        transport_method: TcpProvider::with_address(full_address).await.unwrap().into_threaded(),
-            //.and_callback(|| &call_system.on_received_data),
-        message_format: Box::new(MessagePack),
-        call_system,
-        capabilities: vec![]
-    };
-    setup.add_capabilities(vec![
-        Box::new(GreetProvider)
-    ]);
+    let transporter = TcpProvider::with_address(full_address).await.unwrap();
+    let mut setup = ProviderSetup::with_transporter(transporter)
+        .with_call_system(JsonRPCv2::new)
+        .with_capability(GreetProvider::new)
+        //.into_threaded()
+        ;
 
     respond_to_incoming_hellos(&mut setup).await;
 }

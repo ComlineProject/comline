@@ -1,5 +1,4 @@
 // Standard Uses
-use std::sync::{Arc, RwLock};
 
 // Crate Uses
 use crate::setups::jrpc_tcp_msgpack::generated::{
@@ -11,7 +10,6 @@ use comline_runtime::setup::APIResult;
 use comline_runtime::setup::{
     communication::{methods::tcp::provider::TcpProvider, provider::ProviderSetup},
     call_system::systems::json_rpc::JsonRPCv2,
-    message_format::msgpack::MessagePack
 };
 
 
@@ -28,26 +26,24 @@ impl GreetProviderProtocol for GreetProvider {
 pub(crate) async fn main() {
     println!("Running Server");
 
-    // Okay so first we need an address to bind and listen on
+    // So first we need an address to bind and listen on
     let (address, port) = ("127.0.0.1", "2620");
     let full_address = &*(address.to_owned() + ":" + port);
 
-    let mut setup = ProviderSetup {
+    // So lets wrap all up the setup parts in a structure for convenience (might be optional later)
+    let mut setup = ProviderSetup::with_transporter(
         // To transport our messages, lets use TCP
-        transport_method: TcpProvider::with_address(full_address).await.unwrap().into_threaded(),
+        TcpProvider::with_address(full_address).await.unwrap()
+    )
+        // For the call system, lets use Json RPC
+        .with_call_system(JsonRPCv2::new)
 
         // For serialization, lets use the Msgpack format
-        message_format: Box::new(MessagePack),
+        // message_format: Box::new(MessagePack),
 
-        // For the call setup, lets use Json RPC
-        call_system: Arc::new(RwLock::new(JsonRPCv2::default())),
-        capabilities: vec![]
-    };
-
-    // And the capabilities of communication
-    setup.add_capabilities(vec![
-        Box::new(GreetProvider)
-    ]);
+        // And for capabilities of calls, lets just add a greet API
+        .with_capability(GreetProvider::new)
+    ;
 
     respond_to_incoming_hellos(&mut setup).await;
 }

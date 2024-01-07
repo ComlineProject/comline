@@ -1,5 +1,4 @@
 // Standard Uses
-use std::sync::{Arc, RwLock};
 
 // Crate Uses
 use crate::setups::jrpc_tcp_msgpack::generated::{
@@ -8,37 +7,20 @@ use crate::setups::jrpc_tcp_msgpack::generated::{
 };
 
 // External Uses
-use comline_runtime::setup::{APIResult, communication::{
-    consumer::{ConsumerSetup, SharedConsumerSetup},
-    methods::tcp::consumer::TcpConsumer
-}, call_system::{
-    CallSystemProvider,
-    systems::json_rpc::JsonRPCv2
-}, call_system};
+use comline_runtime::setup::{
+    APIResult, communication::{
+        consumer::{ConsumerSetup, SharedConsumerSetup},
+    },
+    call_system::systems::json_rpc::JsonRPCv2,
+};
+use comline_runtime::setup::communication::methods::tcp::consumer::TcpConsumer;
 
 
 impl GreetConsumerProtocol for GreetConsumer {
+    #[allow(unused_variables)]
     fn greet(&self, name: &str) -> APIResult<String> {
-        let mut caller = self.caller.write().unwrap();
-
-        let message: String = call_system::make_parameters(&mut *caller, &[name.to_owned()]);
-        caller.send_blocking_call("greet", &*message)
-        //call_system::send_blocking_call(&mut *caller, "greet", message)
-    }
-
-    /*
-    fn greet(&self, name: &str) -> APIResult<String> {
-        let mut caller= self.caller.write().unwrap() as _;
-        let message = caller.into_message(name);
-
-        let mut caller= self.caller.write().unwrap()
-            .downcast_ref::<dyn CallSystemSender>().unwrap();
-
-        caller.send_call_while_blocking(self, 0, message)
-
         todo!()
     }
-     */
 }
 
 pub(crate) async fn main() {
@@ -49,18 +31,19 @@ pub(crate) async fn main() {
     let full_address = &*(address.to_owned() + ":" + port);
 
     // So lets wrap all up all the setup in a structure for convenience (might be optional later)
-    let setup = ConsumerSetup {
+    let setup = ConsumerSetup::with_transport(
         // To transport our messages, we are going to use TCP
-        transport_method: TcpConsumer::with_address(full_address).unwrap().into_threaded(),
-
+        TcpConsumer::with_address(full_address).unwrap(),
+    )
         // To talk with the other side, we are going to speak the Msgpack format
         // message_format: MessageFormat::Msgpack,
 
         // The call system we are going to speak will be json-rpc
-        call_system: Arc::new(RwLock::new(JsonRPCv2::default())),
+        .with_call_system(JsonRPCv2::new)
 
-        capabilities: vec![],
-    }.add_default_capability(|caller| GreetConsumer::new(caller));
+        // And for capabilities of calls, lets just add a greet API
+        .with_capability(GreetConsumer::new)
+    ;
 
     let setup_threaded = setup.into_threaded();
 

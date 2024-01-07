@@ -6,12 +6,13 @@ edition = "2021"
 
 
 [features]
-default = ["std"]
+# Temporary json_rpc because of tests, figure how to add to tests only and remove from default
+default = ["std", "json_rpc"]
 std = []
 
 # Call Systems
 open_rpc = []
-json_rpc = ["dep:jsonrpc", "dep:json_rpc_v2"]
+json_rpc = ["dep:json-rpc-types"]
 
 
 
@@ -30,13 +31,15 @@ libloading = "0.8.0"
 tokio = { version = "1.33.0", features = ["full"] }
 
 # Call Systems
-json_rpc_v2 = { version = "0.2.0", optional = true }
-jsonrpc = { version = "0.17.0", default-features = false, features = ["base64"], optional = true }
+#json_rpc_v2 = { version = "0.2.0", optional = true }
+#jsonrpc = { version = "0.17.0", default-features = false, features = ["base64"], optional = true }
+json-rpc-types = { version = "1.3.4", optional = true }
 
 # Message Formats
 rmp = "0.8.12"
 rmp-serde = "1.1.2"
 serde = "1.0.190"
+serde_json = { version = "1.0.104", features = [] }
 
 
 [dev-dependencies]

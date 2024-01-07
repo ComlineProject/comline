@@ -9,7 +9,6 @@ use std::any::Any;
 // External Uses
 use eyre::Result;
 use downcast_rs::{DowncastSync, impl_downcast};
-use serde::{ser::Serialize, de::DeserializeOwned};
 
 
 #[allow(unused)]
@@ -19,4 +18,12 @@ pub trait MessageFormat: DowncastSync {
 }
 impl_downcast!(sync MessageFormat);
 
-pub trait Message: Serialize + DeserializeOwned {}
+
+pub struct Message<'a>(pub Vec<Parameter<'a>>);
+impl<'a> Message<'a> {
+    pub fn new() -> Self { Self { 0: vec![] } }
+    pub fn parameter(mut self, param: &'a dyn Any) -> Self {
+        self.0.push(Parameter(param)); self
+    }
+}
+pub struct Parameter<'a>(&'a dyn Any); // for<'a> Deserialize<'a>

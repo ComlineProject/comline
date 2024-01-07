@@ -13,16 +13,22 @@ use comline_runtime::setup::{
         consumer::{ConsumerSetup, SharedConsumerSetup},
         methods::tcp::consumer::TcpConsumer
     },
-    call_system::systems::json_rpc::JsonRPCv2
+    call_system::systems::json_rpc::JsonRPCv2,
+    message_format::Message
 };
+use downcast_rs::Downcast;
+
 
 impl GreetConsumerProtocol for GreetConsumer {
     fn greet(&self, name: &str) -> APIResult<String> {
-        // let mut call = self.caller.write().unwrap();
-        //let message = todo!();
+        let name = name.to_owned();
+        let message = Message::new().parameter(name.as_any());
 
-        // caller.send_call_indexed(self, 0);
-        todo!()
+        let mut caller = self.caller.write().unwrap();
+        let result = caller.send_blocking_call("greet", message)?;
+        let result = result.downcast::<String>().unwrap();
+
+        Ok(*result)
     }
 }
 
@@ -32,12 +38,10 @@ pub(crate) async fn main() {
     let (address, port) = ("127.0.0.1", "2620");
     let full_address = &*(address.to_owned() + ":" + port);
 
-    let setup = ConsumerSetup {
-        transport_method: TcpConsumer::with_address(full_address).unwrap().into_threaded(),
-        call_system: JsonRPCv2::default().into_threaded(),
-        capabilities: vec![],
-    };
-    //setup.add_capability(GreetConsumer::new());
+    let transporter = TcpConsumer::with_address(full_address).unwrap();
+    let setup = ConsumerSetup::with_transport(transporter)
+        .with_call_system(JsonRPCv2::new)
+        .with_capability(GreetConsumer::new);
 
     let setup_threaded = setup.into_threaded();
 

@@ -27,26 +27,33 @@ pub mod schemas {
 }
 
 pub mod provider {
+    // Standard Uses
+    use std::sync::{Arc, RwLock};
+
     // Crate Uses
     use super::schemas::GreetProtocol;
 
     // Internal Uses
     use comline_runtime::setup::{
-        call_system::meta::CallProtocolMeta
-    };
-    use comline_runtime::setup::{
+        call_system::{
+            meta::CallProtocolMeta,
+            provider::CallSystemProvider
+        },
         communication::{
-            MessageReceiver, MessageSender,
             provider::ProviderCapability
         }
     };
 
-    pub struct GreetProvider;
+    pub struct GreetProvider {
+        #[allow(dead_code)]
+        pub(crate) caller: Arc<RwLock<dyn CallSystemProvider>>,
+    }
+    impl GreetProvider {
+        pub fn new(caller: Arc<RwLock<dyn CallSystemProvider>>) -> Self { Self { caller } }
+    }
 
     impl GreetProtocol for GreetProvider {}
     impl ProviderCapability for GreetProvider {}
-    impl MessageSender for GreetProvider {}
-    impl MessageReceiver for GreetProvider {}
     impl CallProtocolMeta for GreetProvider {
         fn calls_names(&self) -> &'static [&'static str] {
             &["greet"]
@@ -64,21 +71,22 @@ pub mod consumer {
     // External Uses
     use comline_runtime::setup::{
         communication::{
-            MessageReceiver, MessageSender,
             consumer::ConsumerCapability
         },
-        call_system::{CallSystem, meta::CallProtocolMeta},
+        call_system::meta::CallProtocolMeta,
     };
+    use comline_runtime::setup::call_system::consumer::CallSystemConsumer;
 
     pub struct GreetConsumer {
         #[allow(unused_variables)]
-        pub(crate) caller: Arc<RwLock<dyn CallSystem>>,
+        pub(crate) caller: Arc<RwLock<dyn CallSystemConsumer>>,
+    }
+    impl GreetConsumer {
+        pub fn new(caller: Arc<RwLock<dyn CallSystemConsumer>>) -> Self { Self { caller } }
     }
 
     impl GreetProtocol for GreetConsumer {}
     impl ConsumerCapability for GreetConsumer {}
-    impl MessageSender for GreetConsumer {}
-    impl MessageReceiver for GreetConsumer {}
     impl CallProtocolMeta for GreetConsumer {
         fn calls_names(&self) -> &'static [&'static str] {
             &["greet"]

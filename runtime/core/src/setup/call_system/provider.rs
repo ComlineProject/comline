@@ -24,8 +24,7 @@ pub trait CallSystemProvider: CallSystem {
     }
     */
 
-    fn send_blocking_call<P, R>(&mut self, name: &str, parameters: P) -> APIResult<R>
-        where P: Any
+    fn send_blocking_call(&mut self, name: &str, parameters: &dyn Any) -> APIResult<Box<dyn Any>>
     {
         todo!()
     }

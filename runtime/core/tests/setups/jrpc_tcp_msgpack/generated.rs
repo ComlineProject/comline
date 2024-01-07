@@ -27,27 +27,31 @@ pub mod schemas {
 }
 
 pub mod provider {
+    use std::sync::{Arc, RwLock};
     // Crate Uses
     use super::schemas::GreetProtocol;
 
     // Internal Uses
     use comline_runtime::setup::call_system::meta::CallProtocolMeta;
+    use comline_runtime::setup::call_system::provider::CallSystemProvider;
     use comline_runtime::setup::communication::{
-        MessageReceiver, MessageSender,
         provider::ProviderCapability
     };
 
+    #[allow(dead_code)]
     pub struct GrootProvider;
-    impl MessageReceiver for GrootProvider {}
-    impl MessageSender for GrootProvider {}
 
 
-    pub struct GreetProvider;
+    pub struct GreetProvider {
+        #[allow(dead_code)]
+        pub(crate) caller: Arc<RwLock<dyn CallSystemProvider>>,
+    }
+    impl GreetProvider {
+        pub fn new(caller: Arc<RwLock<dyn CallSystemProvider>>) -> Self { Self { caller } }
+    }
 
     impl GreetProtocol for GreetProvider {}
     impl ProviderCapability for GreetProvider {}
-    impl MessageSender for GreetProvider {}
-    impl MessageReceiver for GreetProvider {}
     impl CallProtocolMeta for GreetProvider {
         fn calls_names(&self) -> &'static [&'static str] {
             &["greet"]
@@ -65,32 +69,24 @@ pub mod consumer {
     // External Uses
     use comline_runtime::setup::{
         communication::{
-            MessageReceiver, MessageSender,
             consumer::ConsumerCapability
         },
         call_system::{
-            CallSystem, CallSystemProvider,
+            consumer::CallSystemConsumer,
             meta::CallProtocolMeta
         },
     };
 
     pub struct GreetConsumer {
-        pub(crate) caller: Arc<RwLock<dyn CallSystemProvider>>,
-        // pub(crate) setup: SharedConsumerSetup,
+        #[allow(dead_code)]
+        pub(crate) caller: Arc<RwLock<dyn CallSystemConsumer>>,
     }
     impl GreetConsumer {
-        /*
-        pub fn new(setup: ConsumerSetup) -> GreetConsumer {
-            GreetConsumer { setup }
-        }
-        */
-        pub fn new(caller: Arc<RwLock<dyn CallSystemProvider>>) -> Self { Self { caller } }
+        pub fn new(caller: Arc<RwLock<dyn CallSystemConsumer>>) -> Self { Self { caller } }
     }
 
     impl GreetProtocol for GreetConsumer {}
     impl ConsumerCapability for GreetConsumer {}
-    impl MessageSender for GreetConsumer {}
-    impl MessageReceiver for GreetConsumer {}
     impl CallProtocolMeta for GreetConsumer {
         fn calls_names(&self) -> &'static [&'static str] {
             &["greet"]
