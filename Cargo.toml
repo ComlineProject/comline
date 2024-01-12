@@ -12,6 +12,7 @@ members = [
     "package-manager",
     "package-server",
     "runtime/core",
+    "runtime/core_no-std",
     "runtime/tests/provider_consumer",
     #"runtime/tests/test_rt_dylib",
     "runtime-langs/lua",

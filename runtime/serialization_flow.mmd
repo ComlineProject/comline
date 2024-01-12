@@ -1,0 +1,27 @@
+classDiagram
+    class CPM["Consumer Protocol Method"] {
+        message: &str = "Hello"
+    }
+
+    class AC["AbstractCall"] {
+        name: &str
+        params: &[dyn Any] (Not sure)
+    }
+
+
+    class CSF["Call System Message"] {
+        <<interface>>
+    }
+
+    class JRR["JsonRPC(Request/Response)"] {
+        id: usize
+        name: &str
+        params: serde_json::Value
+    }
+
+    class B["Bytes(&[u8])"]
+
+    CPM*--*AC
+    AC*--*JRR
+    CSF-->JRR
+    JRR*--*B

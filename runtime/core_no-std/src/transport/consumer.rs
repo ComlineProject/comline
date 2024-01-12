@@ -1,16 +1,17 @@
-// Standard Uses
-use std::sync::{Arc, RwLock};
+// No Std Uses
 
+use alloc::boxed::Box;
+use alloc::sync::Arc;
+use alloc::vec;
+use alloc::vec::Vec;
+use tokio::sync::RwLock;
 // Crate Uses
-use crate::setup::call_system::consumer::CallSystemConsumer;
-use crate::setup::call_system::Origin;
+use crate::call_system::consumer::CallSystemConsumer;
+use crate::call_system::{CallSystem, Origin};
 
 // External Uses
-use async_trait::async_trait;
-use downcast_rs::{DowncastSync, impl_downcast};
 
 
-#[async_trait]
 pub trait CommunicationConsumer: Send + Sync {
     async fn connect_to_provider(&self);
 
@@ -18,14 +19,14 @@ pub trait CommunicationConsumer: Send + Sync {
     async fn send_data_async(&mut self, data: &[u8]) -> eyre::Result<()>;
 }
 
-pub struct ConsumerSetup<T, CC> where T: CommunicationConsumer, CC: CallSystemConsumer {
-    pub transport_method: Arc<RwLock<T>>,
-    pub call_system: Option<Arc<RwLock<CC>>>,
+pub struct ConsumerSetup {
+    pub transport_method: Arc<RwLock<dyn CommunicationConsumer>>,
+    pub call_system: Option<Arc<RwLock<dyn CallSystemConsumer>>>,
     pub capabilities: Vec<Box<dyn ConsumerCapability>>
 }
 
-impl<T, CC> ConsumerSetup<T, CC> where T: CommunicationConsumer + 'static, CC: CallSystemConsumer {
-    pub fn with_transport(transporter: T) -> Self {
+impl ConsumerSetup {
+    pub fn with_transport<T: CommunicationConsumer + 'static>(transporter: T) -> Self {
         Self {
             transport_method: Arc::new(RwLock::new(transporter)),
             call_system: None,
@@ -33,19 +34,23 @@ impl<T, CC> ConsumerSetup<T, CC> where T: CommunicationConsumer + 'static, CC: C
         }
     }
 
-    pub fn with_call_system<CFn>(mut self, call_system: CFn) -> Self
-        where CFn: FnOnce(Origin) -> CC
+    pub fn with_call_system<C, CFn>(mut self, call_system: CFn) -> Self
+        where
+            C: CallSystem + CallSystemConsumer,
+            CFn: FnOnce(Origin) -> C
     {
+        /*
         self.call_system = Some(Arc::new(RwLock::new(call_system(
             Origin::Consumer(self.transport_method.clone()),
         ))));
+        */
         self
     }
 
     pub fn with_capability<C, Cfn>(mut self, capability: Cfn) -> Self
         where
             C: ConsumerCapability,
-            Cfn: FnOnce(Arc<RwLock<CC>>) -> C
+            Cfn: FnOnce(Arc<RwLock<dyn CallSystemConsumer>>) -> C
     {
         self.capabilities.push(Box::new(capability(self.call_system.as_ref().unwrap().clone())));
         self
@@ -56,28 +61,11 @@ impl<T, CC> ConsumerSetup<T, CC> where T: CommunicationConsumer + 'static, CC: C
     pub fn add_default_capability<C, Cfn>(mut self, capability: Cfn) -> Self
         where
             C: ConsumerCapability,
-            Cfn: FnOnce(Arc<RwLock<CC>>) -> C
+            Cfn: FnOnce(Arc<RwLock<dyn CallSystemConsumer>>) -> C
     {
         self.capabilities.push(Box::new(capability(self.call_system.as_ref().unwrap().clone())));
         self
     }
-
-    // TODO: Unsure if these are necessary right now, their signatures are also incorrect
-    //       they should have the same parameters ad the `ẁith_capability` method
-    /*
-    pub fn add_capability<
-        C: ConsumerCapability,
-        Cfn: Fn(&ConsumerSetup) -> C
-    >(
-        &mut self, capability_fn: Cfn
-    ) {
-        self.capabilities.push(Box::new(capability_fn(&*self)));
-    }
-
-    pub fn add_capabilities(&mut self, mut capabilities: Vec<Box<dyn ConsumerCapability>>) {
-        self.capabilities.append(&mut capabilities);
-    }
-    */
 
     pub fn capability<C: ConsumerCapability>(&self) -> Option<&C> {
         for capability in self.capabilities.iter() {
@@ -101,10 +89,9 @@ impl<T, CC> ConsumerSetup<T, CC> where T: CommunicationConsumer + 'static, CC: C
 }
 
 
-pub type SharedConsumerSetup<T, CC> = Arc<RwLock<ConsumerSetup<T, CC>>>;
+pub type SharedConsumerSetup = Arc<RwLock<ConsumerSetup>>;
 
-pub trait ConsumerCapability: DowncastSync {
+pub trait ConsumerCapability {
     //fn setup(&self) -> Arc<RwLock<ConsumerSetup>>;
 }
-impl_downcast!(sync ConsumerCapability);
 

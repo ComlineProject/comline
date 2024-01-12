@@ -7,15 +7,15 @@ use crate::setups::jrpc_tcp::generated::{
 };
 
 // External Uses
-use comline_runtime::setup::CallResult;
+use comline_runtime::setup::APIResult;
 use comline_runtime::setup::{
     communication::{methods::tcp::provider::TcpProvider, provider::ProviderSetup},
     call_system::systems::json_rpc::JsonRPCv2,
 };
 
 
-impl<CS> GreetProviderProtocol for GreetProvider<CS> {
-    fn greet(&self, name: &str) -> CallResult<String> {
+impl GreetProviderProtocol for GreetProvider {
+    fn greet(&self, name: &str) -> APIResult<String> {
         println!("[Server] Received a greet request with name '{}'", name);
 
         Ok("Hello ".to_owned() + name)
@@ -31,16 +31,18 @@ pub(crate) async fn main() {
 
     let transporter = TcpProvider::with_address(full_address).await.unwrap();
     let mut setup = ProviderSetup::with_transporter(transporter)
-        .with_call_system::<JsonRPCv2, _>(JsonRPCv2::new)
+        .with_call_system(JsonRPCv2::new)
         .with_capability(GreetProvider::new)
-    ;
+        //.into_threaded()
+        ;
 
     respond_to_incoming_hellos(&mut setup).await;
 }
 
-async fn respond_to_incoming_hellos(setup: &mut ProviderSetup<TcpProvider, JsonRPCv2>) {
-    setup.transporter.read().unwrap()
-        .listen_incoming_connection()
+async fn respond_to_incoming_hellos(setup: &mut ProviderSetup) {
+    let provider = setup.transport_method.read().unwrap();
+    provider.downcast_ref::<TcpProvider>().unwrap()
+        .listen_incoming_connection(/*&mut *setup.call_system*/)
         .await;
 }
 

@@ -1,40 +1,38 @@
 // Standard Uses
-use std::any::Any;
 
 // Crate Uses
-use crate::setup::APIResult;
-use crate::setup::call_system::CallSystem;
+use crate::setup::CallResult;
+use crate::setup::call_system::{CallSystem, Kind, DEFAULT_CALL_TIMEOUT};
+use crate::setup::message_format::AbstractCall;
 
 // External Uses
-use crate::setup::message_format::Message;
+use serde::{Deserialize, Serialize};
 
 
-#[allow(unused)]
 pub trait CallSystemConsumer: CallSystem {
-    /*
-    fn send_call_named<C>(&mut self, call_meta: &C, name: &str)
-        where C: CallProtocolMeta, Self: Sized
-    {
-        todo!()
-    }
-    */
+    fn send_async_call<M>(&mut self, kind: Kind, message: AbstractCall<M>)
+        -> impl std::future::Future<Output = CallResult<M>> + Send
+        where M: Send + Serialize + for<'de> Deserialize<'de>
+    ;
 
-    fn send_blocking_call(&mut self, name: &str, message: Message) -> APIResult<Box<dyn Any>>
-    {
-        todo!()
+    fn send_blocking_call<M: Send + Serialize>(&mut self, kind: Kind, call: AbstractCall<M>)
+        -> CallResult<M>
+        where M: Send + Serialize + for<'de> Deserialize<'de>
+    ;
+}
+
+pub fn send_call_with_conditions<M, R>(kind: Kind, call: AbstractCall<M>) -> CallResult<M>
+    where M: Send
+{
+    let call_timeout = DEFAULT_CALL_TIMEOUT;
+    let start_time = std::time::Instant::now();
+
+    let response: Option<R> = None;
+    while response.is_none() {
+        if start_time.elapsed().as_millis() > call_timeout {
+            return Err(())
+        }
     }
 
-    /*
-    fn send_call_indexed<M: for<'a> Deserialize<'a>>(
-        &mut self, meta: &dyn CallProtocolMeta, index: usize, message: M
-    );
-    */
-
-    /*
-    fn send_call_indexed_block<Result>(
-        &mut self, call_meta: &dyn CallProtocolMeta
-    ) -> APIResult<Result> {
-        todo!()
-    }
-    */
+    todo!()
 }

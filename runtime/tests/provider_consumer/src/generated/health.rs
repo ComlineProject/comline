@@ -5,7 +5,7 @@
 // Crate Uses
 
 // External Uses
-use comline_runtime::setup::APIResult;
+use comline_runtime::setup::CallResult;
 
 
 pub trait Context {
@@ -16,6 +16,6 @@ pub struct Capability(pub String);
 
 #[allow(async_fn_in_trait)]
 pub trait HealthCheckProtocol {
-	fn alive(&self) -> APIResult<()>;
-	fn capabilities(&self) -> APIResult<Vec<Capability>>;
+	fn alive(&self) -> CallResult<()>;
+	fn capabilities(&self) -> CallResult<Vec<Capability>>;
 }

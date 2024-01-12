@@ -4,16 +4,14 @@
 #![feature(slice_ptr_get)]
 
 // Crate configuration
-//#![no_std]
+#![cfg_attr(not(test), no_std)]
+#![warn(clippy::std_instead_of_core, clippy::std_instead_of_alloc)]
 
-
+// Extern Crates
 extern crate core;
+extern crate alloc;
 
 // Relative Modules
-/*
-pub mod prelude {
-    pub use crate::setup::APIResult;
-}
-*/
-pub mod package_abi;
-pub mod setup;
+pub mod call_system;
+pub mod transport;
+pub mod message;

@@ -4,7 +4,7 @@ mod server;
 mod client;
 
 
-#[tokio::test(flavor = "multi_thread", worker_threads = 1)]
+#[tokio::test]
 async fn send_name_from_client_and_receive_hello_from_server() {
     // This entry point is just an example of simulation, you would do differently
     // if not simulating both parts

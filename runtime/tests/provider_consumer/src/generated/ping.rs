@@ -5,7 +5,7 @@
 // Crate Uses
 
 // External Uses
-use comline_runtime::setup::APIResult;
+use comline_runtime::setup::CallResult;
 
 
 pub const LOW_PING_RATE: u16 = 20;
@@ -13,8 +13,8 @@ pub const LOW_PING_RATE: u16 = 20;
 
 #[allow(async_fn_in_trait)]
 pub trait PingProvider {
-	async fn ping(&self) -> APIResult<()>;
-	fn ping_limit(&self) -> APIResult<()>;
+	async fn ping(&self) -> CallResult<()>;
+	fn ping_limit(&self) -> CallResult<()>;
 }
 
 #[allow(async_fn_in_trait)]

@@ -7,23 +7,57 @@ use std::any::Any;
 // Crate Uses
 
 // External Uses
-use eyre::Result;
 use downcast_rs::{DowncastSync, impl_downcast};
 
 
 #[allow(unused)]
 pub trait MessageFormat: DowncastSync {
-    fn serialize(&self, data: &dyn Any) -> Result<Box<[u8]>>;
-    fn deserialize(&self, data: &[u8]) -> Result<Box<dyn Any>>;
+    fn serialize(&self, data: &dyn Any) -> eyre::Result<Box<[u8]>>;
+    fn deserialize(&self, data: &[u8]) -> eyre::Result<Box<dyn Any>>;
 }
 impl_downcast!(sync MessageFormat);
 
 
-pub struct Message<'a>(pub Vec<Parameter<'a>>);
+pub struct Parameter<'a>(Inner<'a>); // for<'a> Deserialize<'a>
+pub type Inner<'a> = &'a (dyn Any + Sync);
+
+pub struct Message<'a> {
+    pub parameters: Vec<Parameter<'a>>
+}
+
 impl<'a> Message<'a> {
-    pub fn new() -> Self { Self { 0: vec![] } }
-    pub fn parameter(mut self, param: &'a dyn Any) -> Self {
-        self.0.push(Parameter(param)); self
+    pub fn new() -> Self { Self { parameters: vec![] } }
+    pub fn parameter<T: Any + Send + Sync>(mut self, parameter: &'a T) -> Self {
+        self.parameters.push(Parameter(parameter)); self
     }
 }
-pub struct Parameter<'a>(&'a dyn Any); // for<'a> Deserialize<'a>
+
+/*
+impl<'a> Deserialize<'a> for Message<'a> {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: Deserializer<'a> {
+        todo!()
+    }
+}
+
+
+struct MessageVisitor;
+impl Visitor for MessageVisitor {
+    type Value = ();
+
+    fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
+        todo!()
+    }
+}
+*/
+
+#[allow(unused)]
+pub struct AbstractCall<P: Send> {
+    pub(crate) settings: &'static [&'static (&'static str, &'static Setting)],
+    pub(crate) parameters: P
+}
+
+pub enum Setting {
+    None,
+    Num(usize),
+    Str(&'static str)
+}

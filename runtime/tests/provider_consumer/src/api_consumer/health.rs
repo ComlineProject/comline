@@ -5,7 +5,7 @@ use crate::context::Consumer;
 use crate::generated::health::{Capability, HealthCheckProtocol};
 
 // External Uses
-use comline_runtime::setup::APIResult;
+use comline_runtime::setup::CallResult;
 
 
 pub struct HealthCheck;
@@ -14,9 +14,9 @@ impl HealthCheck {
 }
 
 impl HealthCheckProtocol for HealthCheck {
-    fn alive(&self) -> APIResult<()> { Ok(()) }
+    fn alive(&self) -> CallResult<()> { Ok(()) }
 
-    fn capabilities(&self) -> APIResult<Vec<Capability>> {
+    fn capabilities(&self) -> CallResult<Vec<Capability>> {
         Ok(vec![Capability("Talk".to_owned())])
     }
 }

@@ -1,0 +1,42 @@
+sequenceDiagram
+    autonumber
+
+    participant User
+
+    box rgb(60, 60, 60) Consumer
+        participant CG as Greeter
+        participant CAC as Abstract Call
+        participant CCS as Call System
+        participant CT as Transporter
+    end
+
+    box rgb(60, 60, 60) Provider
+        participant PT as Transporter
+        participant PCS as Call System
+        participant PAC as Abstract Call
+        participant PG as Greeter
+    end
+
+    participant Server
+
+    User->>CG: Call the *Greeter::greet* API function with the parameter Name(&str)
+    CG-->CAC: Serialize Call parameters into Abstract Message
+    CG->>CCS: Prepare Call Request and map Abstract Call parameters into it
+    CCS->>CT: Pass the Call Request(&[u8]) to Transporter
+    CT->>PT: Send Request(&[u8]) to Server
+
+    PT->>PCS: Deserialize Call Request(&[u8]) into Call Request Format(&T)
+    PCS->>PAC: Deserialize Call Request(&T) into Abstract Call Message(&Message)
+    PAC->>PG: Map Abstract Call parameters into correspondent Call function/method
+    PG->>Server: Implementation of the requested call, which returns "Hello {Name}"(&str)
+
+    Server->>PG: Do server call related things and return result
+    PG-->PAC: Serialize Call parameters into Abstract Message
+    PG->>PCS: Prepare Response message and map Abstract Call parameters into it
+    PCS->>PT: Pass the Call Message to Transporter
+    PT->>CT: Send Request to Consumer
+
+    CT->>CCS: Deserialize Call Response into Abstract Call Message
+    CCS->>CG: Map Abstract Call parameters into correspondent Call function/method
+    CG->>User: Receive the result(&str) from the initial `Greeter::greet* API function call
+

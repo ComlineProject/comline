@@ -5,7 +5,7 @@ pub mod communication;
 pub mod handler;
 
 
-// TODO: A Error type will be necessary here, for things like API state and response status, information, etc
-pub type APIResult<T> = Result<T, ()>;
+// TODO: A Error type will be necessary here, for things like API Call state and response status, information, etc
+pub type CallResult<T> = Result<T, ()>;
 
 

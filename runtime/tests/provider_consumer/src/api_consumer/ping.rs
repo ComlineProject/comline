@@ -5,16 +5,16 @@ use crate::context::Provider;
 use super::super::generated::ping::{PingProvider};
 
 // External Uses
-use comline_runtime::setup::APIResult;
+use comline_runtime::setup::CallResult;
 
 
 pub struct Ping;
 impl PingProvider for Ping {
-    async fn ping(&self) -> APIResult<()> {
+    async fn ping(&self) -> CallResult<()> {
         todo!()
     }
 
-    fn ping_limit(&self) -> APIResult<()> {
+    fn ping_limit(&self) -> CallResult<()> {
         todo!()
     }
 }

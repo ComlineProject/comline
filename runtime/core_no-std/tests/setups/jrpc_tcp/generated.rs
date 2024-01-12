@@ -3,7 +3,7 @@
 pub mod schemas {
 
     // Internal Uses
-    use comline_runtime::setup::CallResult;
+    use comline_runtime::setup::APIResult;
     use comline_runtime::setup::{
         call_system::meta::CallProtocolMeta,
         communication::{
@@ -21,7 +21,7 @@ pub mod schemas {
         use super::*;
 
         pub trait GreetProviderProtocol: GreetProtocol + ProviderCapability {
-            fn greet(&self, name: &str) -> CallResult<String>;
+            fn greet(&self, name: &str) -> APIResult<String>;
         }
     }
 
@@ -30,7 +30,7 @@ pub mod schemas {
         use super::*;
 
         pub trait GreetConsumerProtocol: GreetProtocol + ConsumerCapability {
-            fn greet(&self, name: &str) -> CallResult<String>;
+            fn greet(&self, name: &str) -> APIResult<String>;
         }
     }
 }
@@ -44,23 +44,26 @@ pub mod provider {
 
     // Internal Uses
     use comline_runtime::setup::{
-        call_system::meta::CallProtocolMeta,
+        call_system::{
+            meta::CallProtocolMeta,
+            provider::CallSystemProvider
+        },
         communication::{
             provider::ProviderCapability
         }
     };
 
-    pub struct GreetProvider<CS> {
+    pub struct GreetProvider {
         #[allow(dead_code)]
-        pub(crate) caller: Arc<RwLock<CS>>,
+        pub(crate) caller: Arc<RwLock<dyn CallSystemProvider>>,
     }
-    impl<CS> GreetProvider<CS> {
-        pub fn new(caller: Arc<RwLock<CS>>) -> Self { Self { caller } }
+    impl GreetProvider {
+        pub fn new(caller: Arc<RwLock<dyn CallSystemProvider>>) -> Self { Self { caller } }
     }
 
-    impl<CS> GreetProtocol for GreetProvider<CS> {}
-    impl<CS> ProviderCapability for GreetProvider<CS> {}
-    impl<CS> CallProtocolMeta for GreetProvider<CS> {
+    impl GreetProtocol for GreetProvider {}
+    impl ProviderCapability for GreetProvider {}
+    impl CallProtocolMeta for GreetProvider {
         //const CALL_NAMES: &'static [&'static str] = &[];
 
         fn calls_names(&self) -> &'static [&'static str] {
@@ -85,17 +88,17 @@ pub mod consumer {
     };
     use comline_runtime::setup::call_system::consumer::CallSystemConsumer;
 
-    pub struct GreetConsumer<CS> {
+    pub struct GreetConsumer {
         #[allow(unused_variables)]
-        pub(crate) caller: Arc<RwLock<CS>>,
+        pub(crate) caller: Arc<RwLock<dyn CallSystemConsumer>>,
     }
-    impl<CS: CallSystemConsumer> GreetConsumer<CS> {
-        pub fn new(caller: Arc<RwLock<CS>>) -> Self { Self { caller } }
+    impl GreetConsumer {
+        pub fn new(caller: Arc<RwLock<dyn CallSystemConsumer>>) -> Self { Self { caller } }
     }
 
-    impl<CS: CallSystemConsumer> GreetProtocol for GreetConsumer<CS> {}
-    impl<CS: CallSystemConsumer> ConsumerCapability for GreetConsumer<CS> {}
-    impl<CS: CallSystemConsumer> CallProtocolMeta for GreetConsumer<CS> {
+    impl GreetProtocol for GreetConsumer {}
+    impl ConsumerCapability for GreetConsumer {}
+    impl CallProtocolMeta for GreetConsumer {
         fn calls_names(&self) -> &'static [&'static str] {
             &["greet"]
         }

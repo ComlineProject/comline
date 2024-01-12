@@ -8,28 +8,29 @@ use crate::setups::jrpc_tcp::generated::{
 
 // External Uses
 use comline_runtime::setup::{
+    APIResult,
     communication::{
         consumer::ConsumerSetup,
         methods::tcp::consumer::TcpConsumer
     },
-    call_system::{
-        consumer::CallSystemConsumer,
-        meta::CallProtocolMeta, Kind,
-        systems::json_rpc::JsonRPCv2
-    },
-    CallResult
+    call_system::systems::json_rpc::JsonRPCv2,
+    message_format::Message
 };
+use comline_runtime::setup::call_system::meta::CallProtocolMeta;
 
 
-impl<CS: CallSystemConsumer> GreetConsumerProtocol for GreetConsumer<CS> {
-    fn greet(&self, name: &str) -> CallResult<String> {
-        let call_name = Kind::Named(self.call_name_from_id(0).unwrap().to_owned());
-        let call = self.make_call(name.to_owned());
+impl GreetConsumerProtocol for GreetConsumer {
+    fn greet(&self, name: &str) -> APIResult<String> {
+        let name = name.to_owned();
+        let message = Message::new(); //.parameter(name.as_any());
 
         let mut caller = self.caller.write().unwrap();
 
-        let result = caller.send_blocking_call(call_name, call)?;
-        Ok(result)
+        let call_name = <Self as CallProtocolMeta>::call_name_from_id(self,0).unwrap();
+        let result = caller.send_blocking_call(call_name, message)?;
+        let result = result.downcast::<String>().unwrap();
+
+        Ok(*result)
     }
 }
 
@@ -48,9 +49,9 @@ pub(crate) async fn main() {
 }
 
 
-fn greet_with_name<CS: CallSystemConsumer>(setup: &mut ConsumerSetup<TcpConsumer, CS>) {
+fn greet_with_name(setup: &mut ConsumerSetup) {
     //let mut setup_write = setup.write().unwrap();
-    let greeter = setup.capability_mut::<GreetConsumer<CS>>().unwrap();
+    let greeter = setup.capability_mut::<GreetConsumer>().unwrap();
     let name = "Client";
 
     println!("[Client] Sending a greet request with name '{}'", name);

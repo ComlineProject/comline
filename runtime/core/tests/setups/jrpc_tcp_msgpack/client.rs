@@ -8,17 +8,18 @@ use crate::setups::jrpc_tcp_msgpack::generated::{
 
 // External Uses
 use comline_runtime::setup::{
-    APIResult, communication::{
+    CallResult, communication::{
         consumer::{ConsumerSetup, SharedConsumerSetup},
     },
     call_system::systems::json_rpc::JsonRPCv2,
 };
+use comline_runtime::setup::call_system::consumer::CallSystemConsumer;
 use comline_runtime::setup::communication::methods::tcp::consumer::TcpConsumer;
 
 
-impl GreetConsumerProtocol for GreetConsumer {
+impl<CS: CallSystemConsumer> GreetConsumerProtocol for GreetConsumer<CS> {
     #[allow(unused_variables)]
-    fn greet(&self, name: &str) -> APIResult<String> {
+    fn greet(&self, name: &str) -> CallResult<String> {
         todo!()
     }
 }
@@ -51,9 +52,9 @@ pub(crate) async fn main() {
 }
 
 
-fn greet_with_name(setup: SharedConsumerSetup) {
+fn greet_with_name(setup: SharedConsumerSetup<TcpConsumer, JsonRPCv2>) {
     let mut setup_write = setup.write().unwrap();
-    let greeter = setup_write.capability_mut::<GreetConsumer>().unwrap();
+    let greeter = setup_write.capability_mut::<GreetConsumer<JsonRPCv2>>().unwrap();
     let name = "Client";
 
     println!("[Client] Sending a greet request with name '{}'", name);

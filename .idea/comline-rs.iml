@@ -27,6 +27,9 @@
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/lua/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime/tests/provider_consumer/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime/tests/test_rt_dylib/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/runtime/core_no-std/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/runtime/core_no-std/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/runtime/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/core/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/codelib-gen/_core/target" />
