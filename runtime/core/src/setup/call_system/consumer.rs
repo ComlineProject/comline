@@ -3,7 +3,7 @@
 // Crate Uses
 use crate::setup::CallResult;
 use crate::setup::call_system::{CallSystem, Kind, DEFAULT_CALL_TIMEOUT};
-use crate::setup::message_format::AbstractCall;
+use crate::setup::abstract_call::AbstractCall;
 
 // External Uses
 use serde::{Deserialize, Serialize};

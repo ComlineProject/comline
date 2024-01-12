@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use crate::setup::CallResult;
 use crate::setup::call_system::CallSystem;
 use crate::setup::call_system::Kind;
-use crate::setup::message_format::AbstractCall;
+use crate::setup::abstract_call::AbstractCall;
 
 // External Uses
 

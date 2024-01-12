@@ -1,11 +1,10 @@
 // Standard Uses
 
 // Crate Uses
+use crate::setup::abstract_call::AbstractCall;
 
 // External Uses
 
-
-use crate::setup::message_format::AbstractCall;
 
 pub trait CallProtocolMeta {
     fn calls_names(&self) -> &'static [&'static str];
