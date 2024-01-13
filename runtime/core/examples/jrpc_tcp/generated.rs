@@ -6,7 +6,7 @@ pub mod schemas {
     use comline_runtime::setup::CallResult;
     use comline_runtime::setup::{
         call_system::meta::CallProtocolMeta,
-        communication::{
+        transport::{
             provider::ProviderCapability,
             consumer::ConsumerCapability
         }
@@ -36,7 +36,7 @@ pub mod provider {
     // Internal Uses
     use comline_runtime::setup::{
         call_system::meta::CallProtocolMeta,
-        communication::provider::ProviderCapability
+        transport::provider::ProviderCapability
     };
 
     #[allow(dead_code)]
@@ -75,7 +75,7 @@ pub mod consumer {
 
     // External Uses
     use comline_runtime::setup::{
-        communication::{
+        transport::{
             consumer::ConsumerCapability
         },
         call_system::{

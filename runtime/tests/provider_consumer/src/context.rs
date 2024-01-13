@@ -4,7 +4,7 @@
 use std::sync::{Arc, RwLock};
 
 // External Uses
-use comline_runtime::setup::communication::provider::ProviderSetup;
+use comline_runtime::setup::transport::provider::ProviderSetup;
 
 
 pub trait Context {

@@ -15,7 +15,7 @@ members = [
     "runtime/core_no-std",
     "runtime/tests/provider_consumer",
     #"runtime/tests/test_rt_dylib",
-    "runtime-langs/lua",
+    "runtime-langs/lua", "runtime-langs/lua-test",
     #"runtime-langs/luau",
     #"runtime-langs/python",
 ]

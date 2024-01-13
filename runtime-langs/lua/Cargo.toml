@@ -13,7 +13,7 @@ serde = "1.0"
 serde_yaml = "0.9"
 
 # Engines
-mlua = { version = "0.9.1", features = ["lua51", "module", "serialize"] }
+mlua = { version = "0.9.4", features = ["lua51", "module", "serialize"] }
 
 
 [lib]

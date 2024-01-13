@@ -21,7 +21,7 @@ json_rpc = ["dep:json-rpc-types"]
 eyre = "0.6.8"
 downcast-rs = "1.2.0"
 async-trait = "0.1.74"
-tokio = { version = "1.33.0", features = ["net", "sync", "io-util"], default-features = false }
+tokio = { version = "1.33.0", features = ["net", "rt-multi-thread", "sync", "io-util"], default-features = false }
 
 # Serialization
 serde = "1.0.190"

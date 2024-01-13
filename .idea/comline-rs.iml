@@ -22,7 +22,6 @@
       <sourceFolder url="file://$MODULE_DIR$/comline/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core_stdlib/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/luau/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/runtime-langs/luau/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/python/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime-langs/lua/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime/tests/provider_consumer/src" isTestSource="false" />
@@ -30,6 +29,8 @@
       <sourceFolder url="file://$MODULE_DIR$/runtime/core_no-std/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/runtime/core_no-std/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/runtime/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/runtime-langs/lua-test/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/runtime-langs/lua/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/core/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/codelib-gen/_core/target" />

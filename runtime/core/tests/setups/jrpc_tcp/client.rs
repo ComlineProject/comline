@@ -8,7 +8,7 @@ use crate::setups::jrpc_tcp::generated::{
 
 // External Uses
 use comline_runtime::setup::{
-    communication::{
+    transport::{
         consumer::ConsumerSetup,
         methods::tcp::consumer::TcpConsumer
     },

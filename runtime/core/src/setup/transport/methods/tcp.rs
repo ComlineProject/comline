@@ -11,7 +11,7 @@ pub mod provider {
     use std::sync::{Arc, RwLock};
 
     // Crate Uses
-    use crate::setup::communication::provider::CommunicationProvider;
+    use crate::setup::transport::provider::CommunicationProvider;
     use crate::setup::call_system::Callback;
 
     // External Uses
@@ -123,7 +123,7 @@ pub mod consumer {
     use std::sync::{Arc, RwLock};
 
     // Crate Uses
-    use crate::setup::communication::consumer::CommunicationConsumer;
+    use crate::setup::transport::consumer::CommunicationConsumer;
 
     // External Uses
     use eyre::Result;

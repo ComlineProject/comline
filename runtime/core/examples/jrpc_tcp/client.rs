@@ -1,21 +1,18 @@
 // Standard Uses
 
-// Crate Uses
-use crate::setups::jrpc_tcp_msgpack::generated::{
-    schemas::GreetConsumerProtocol,
-    consumer::GreetConsumer
-};
-
 // External Uses
 use comline_runtime::setup::{
-    CallResult, communication::{
-        consumer::{ConsumerSetup, SharedConsumerSetup},
-    },
-    call_system::systems::json_rpc::JsonRPCv2,
+    call_system::systems::json_rpc::JsonRPCv2, CallResult,
+    transport::consumer::{ConsumerSetup, SharedConsumerSetup},
 };
 use comline_runtime::setup::call_system::consumer::CallSystemConsumer;
-use comline_runtime::setup::communication::methods::tcp::consumer::TcpConsumer;
+use comline_runtime::setup::transport::methods::tcp::consumer::TcpConsumer;
 
+// Crate Uses
+use crate::setups::jrpc_tcp_msgpack::generated::{
+    consumer::GreetConsumer,
+    schemas::GreetConsumerProtocol
+};
 
 impl<CS: CallSystemConsumer> GreetConsumerProtocol for GreetConsumer<CS> {
     #[allow(unused_variables)]

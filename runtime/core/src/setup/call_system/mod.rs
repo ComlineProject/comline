@@ -9,8 +9,8 @@ use std::sync::{Arc, RwLock};
 
 // Crate Uses
 use crate::setup::call_system::provider::CallSystemProvider;
-use crate::setup::communication::consumer::CommunicationConsumer;
-use crate::setup::communication::provider::CommunicationProvider;
+use crate::setup::transport::consumer::CommunicationConsumer;
+use crate::setup::transport::provider::CommunicationProvider;
 use crate::setup::call_system::consumer::CallSystemConsumer;
 
 // External Uses

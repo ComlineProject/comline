@@ -9,7 +9,7 @@ use crate::setups::jrpc_tcp::generated::{
 // External Uses
 use comline_runtime::setup::CallResult;
 use comline_runtime::setup::{
-    communication::{methods::tcp::provider::TcpProvider, provider::ProviderSetup},
+    transport::{methods::tcp::provider::TcpProvider, provider::ProviderSetup},
     call_system::systems::json_rpc::JsonRPCv2,
 };
 
